@@ -1,9 +1,9 @@
 ## About
-Rocket Table is a lightweight viewer for files in SAS7BDAT, SBDF and CSV formats.
+Rocket Table is a lightweight table viewer for files in SAS7BDAT, SBDF and CSV formats.
 
 ![Rocket Table screenshot](screenshot.png)
 
-Rocket Table is a successor of the [SAS Table Explorer](https://github.com/xantorohara/sas-table-explorer)
+Rocket Table is a successor of the [SAS Table Explorer](https://github.com/xantorohara/sas-table-explorer) project.
 
 ## Download
 [rocket-table-1.0.7.zip](rocket-table-1.0.7.zip)
@@ -39,7 +39,7 @@ Rocket Table is a successor of the [SAS Table Explorer](https://github.com/xanto
 
 ## Search wildcards
 * **?** -  match any single character
-* ***** -  match any string (including the empty string)
+* * -  match any string (including the empty string)
 
 Wildcard characters can be anywhere in the search string, e.g:
 
