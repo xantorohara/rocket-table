@@ -39,7 +39,7 @@ Rocket Table is a successor of the [SAS Table Explorer](https://github.com/xanto
 
 ## Search wildcards
 * **?** -  match any single character
-* * -  match any string (including the empty string)
+* \* -  match any string (including the empty string)
 
 Wildcard characters can be anywhere in the search string, e.g:
 
