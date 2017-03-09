@@ -46,3 +46,24 @@ Wildcard characters can be anywhere in the search string, e.g:
 * **\*word*** -  contains "word"
 
 
+## Search flags
+* **~** - enable case-insensitive search
+* **!** - inverse match
+
+Flag characters should be at the leading positions in the string, e.g:
+
+* **!word** - not equals to "word"
+* **~word*** - starts with "Word" or "word"
+* **~!\*word*** - not contains "Word" or "word", or "wOrD"
+
+## Contacts
+For questions, feature requests or technical support related to this application you can contact me:
+[xantorohara@gmail.com](mailto:xantorohara@gmail.com)
+
+## License
+
+Rocket Table binaries by Xantorohara are licensed under a
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
+
+Version 1.0.7, Published 2015-01-10, Updated 2017-03-10
+
