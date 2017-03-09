@@ -1,5 +1,7 @@
-
+## About
 Rocket Table is a lightweight viewer for files in SAS7BDAT, SBDF and CSV formats.
+
+![Rocket Table screenshot](screenshot.png)
 
 Rocket Table is a successor of the [SAS Table Explorer](https://github.com/xantorohara/sas-table-explorer)
 
@@ -57,7 +59,7 @@ Flag characters should be at the leading positions in the string, e.g:
 * **~!\*word*** - not contains "Word" or "word", or "wOrD"
 
 ## Contacts
-For questions, feature requests or technical support related to this application you can contact me:
+For questions, feature requests or technical support related to this application you can contact
 [xantorohara@gmail.com](mailto:xantorohara@gmail.com)
 
 ## License
@@ -65,5 +67,5 @@ For questions, feature requests or technical support related to this application
 Rocket Table binaries by Xantorohara are licensed under a
 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
 
-Version 1.0.7, Published 2015-01-10, Updated 2017-03-10
+Version 1.0.7, published 2015-01-10, updated 2017-03-10
 
