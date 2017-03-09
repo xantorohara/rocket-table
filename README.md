@@ -1,4 +1,5 @@
-TODO
+Rocket table is a successor of the ["SAS Table Explorer"](https://github.com/xantorohara/sas-table-explorer)
+
 
 ## Welcome to GitHub Pages
 
