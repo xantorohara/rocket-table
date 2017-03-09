@@ -60,17 +60,17 @@ Flag characters should be at the leading positions in the string, e.g:
 
 
 ## Search examples
-Search string | Match result
---------------|------------
-*berry | Match all rows with berries (e.g.: Blueberry, Strawberry, etc.)
-CMSCAT=*THERAPY | Match all medications with category name ending with "THERAPY" (e.g.: CHEMOTHERAPY, RADIOTHERAPY and HORMONAL THERAPY)
-COLUMN1=VALUE1, COLUMN2=VALUE2, COLUMN3=VALUE3 | Match all rows where (COLUMN1=VALUE1 AND COLUMN2=VALUE2 AND COLUMN3=VALUE3)
-SEX=Male, COUNTRY=USA, DEGREE=Academic | Match all men from the USA who have an Academic degree
-AGE=6?, AGE=7? | Match all patients aged 60-70 years old (from 60 to 79)
-COLUMN1=VALUE1, COLUMN1=VALUE2, COLUMN2=VALUE3 | Match all rows where ((COLUMN1=VALUE1 OR COLUMN1=VALUE2) AND COLUMN2=VALUE3)
-SEX=Male, COUNTRY=USA, COUNTRY=Canada, DEGREE=Bachelor, DEGREE=Master | Match all men from the USA or Canada who have a Bachelor or Master degree<
-COUNTRY=!USA | Match all patients not from the USA
-COUNTRY=!USA, GENDER=~MaLe | Match all men not from the USA
+| Search string | Match result |
+|---|---|
+| *berry | Match all rows with berries (e.g.: Blueberry, Strawberry, etc.) |
+| CMSCAT=*THERAPY | Match all medications with category name ending with "THERAPY" (e.g.: CHEMOTHERAPY, RADIOTHERAPY and HORMONAL THERAPY) |
+| COLUMN1=VALUE1, COLUMN2=VALUE2, COLUMN3=VALUE3 | Match all rows where (COLUMN1=VALUE1 AND COLUMN2=VALUE2 AND COLUMN3=VALUE3) |
+| SEX=Male, COUNTRY=USA, DEGREE=Academic | Match all men from the USA who have an Academic degree |
+| AGE=6?, AGE=7? | Match all patients aged 60-70 years old (from 60 to 79) |
+| COLUMN1=VALUE1, COLUMN1=VALUE2, COLUMN2=VALUE3 | Match all rows where ((COLUMN1=VALUE1 OR COLUMN1=VALUE2) AND COLUMN2=VALUE3) |
+| SEX=Male, COUNTRY=USA, COUNTRY=Canada, DEGREE=Bachelor, DEGREE=Master | Match all men from the USA or Canada who have a Bachelor or Master degree |
+| COUNTRY=!USA | Match all patients not from the USA |
+| COUNTRY=!USA, GENDER=~MaLe | Match all men not from the USA |
 
 ## Associate table files with Rocket Table in Windows
 
