@@ -58,6 +58,22 @@ Flag characters should be at the leading positions in the string, e.g:
 * **~word*** - starts with "Word" or "word"
 * **~!\*word*** - not contains "Word" or "word", or "wOrD"
 
+## Associate table files with Rocket Table in Windows
+
+Just execute this script from the directory where the rocket-table.jar is located:
+
+```cmd
+@where javaw >%TEMP%\rocket-table_javaw.var
+@set /p JAVAW=<%TEMP%\rocket-table_javaw.var
+@del %TEMP%\rocket-table_javaw.var
+
+@reg add HKCU\SOFTWARE\Classes\.csv /d "rocket-table" /f
+@reg add HKCU\SOFTWARE\Classes\.sas7bdat /d "rocket-table" /f
+@reg add HKCU\SOFTWARE\Classes\.sbdf /d "rocket-table" /f
+
+@reg add HKCU\SOFTWARE\Classes\rocket-table\shell\open\command /d "\"%JAVAW%\" -jar \"%~dp0rocket-table.jar\" \"%%1\"" /f
+```
+
 ## Contacts
 For questions, feature requests or technical support related to this application you can contact
 [xantorohara@gmail.com](mailto:xantorohara@gmail.com)
