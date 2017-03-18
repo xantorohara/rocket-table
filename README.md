@@ -1,5 +1,5 @@
 ## About
-Rocket Table is a lightweight table viewer for files in SAS7BDAT, SBDF and CSV formats.
+Rocket Table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and CSV formats.
 
 ![Rocket Table screenshot](screenshot.png)
 
