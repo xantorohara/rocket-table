@@ -6,9 +6,10 @@ Rocket Table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and
 Rocket Table is a successor of the [SAS Table Explorer](https://github.com/xantorohara/sas-table-explorer) project.
 
 ## Download
-[rocket-table-1.0.8.zip](rocket-table-1.0.8.zip)
+[rocket-table-1.0.9.zip](rocket-table-1.0.9.zip)
 
 ## Changelog
+* 1.0.9 - Added encoding command line parameter
 * 1.0.8 - Added support for STDF (Spotfire Text Data File) format
 * 1.0.7 - Added support for SBDF (Spotfire Binary Data File) format
 
@@ -89,6 +90,10 @@ Just execute this script from the directory where the rocket-table.jar is locate
 
 @reg add HKCU\SOFTWARE\Classes\rocket-table\shell\open\command /d "\"%JAVAW%\" -jar \"%~dp0rocket-table.jar\" \"%%1\"" /f
 ```
+
+## Command line parameters
+* **--encoding=EncodingName** - specify encoding for input files. E.g.: --encoding=Cp1250
+
 
 ## Contacts
 For questions, feature requests or technical support related to this application you can contact
