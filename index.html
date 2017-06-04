@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Rocket Table</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 900px;
+            margin: 50px auto;
+        }
+        table {
+           border-collapse: collapse;
+        }
+        table td, table th {
+            padding: 5px 10px;
+            margin: 0;
+            box-sizing: border-box;
+            border-spacing: 0;
+            border: solid 1px #cccccc;
+        }
+    </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<h1>Rocket Table</h1>
+<h2>About</h2>
+<p>Rocket Table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and CSV formats.</p>
+<p><img alt="Rocket Table screenshot" src="screenshot.png" /></p>
+<p>Rocket Table is a successor of the <a href="https://github.com/xantorohara/sas-table-explorer">SAS Table Explorer</a> project.</p>
+<h2>Download</h2>
+<p><a href="rocket-table-1.0.9.zip">rocket-table-1.0.9.zip</a></p>
+<h2>Changelog</h2>
+<ul>
+<li>1.0.9 - Added encoding command line parameter</li>
+<li>1.0.8 - Added support for STDF (Spotfire Text Data File) format</li>
+<li>1.0.7 - Added support for SBDF (Spotfire Binary Data File) format</li>
+</ul>
+<h2>Features</h2>
+<ul>
+<li>Open files in SAS7BDAT, SBDF and CSV formats</li>
+<li>Real-time search over the data table</li>
+<li>Search using wildcard patterns</li>
+<li>Search by specific columns</li>
+<li>Show only specific set of columns</li>
+<li>Highlight matched rows</li>
+<li>Filter matched rows</li>
+<li>Sorting</li>
+<li>Truncate options</li>
+<li>Count total, matched, selected and unique rows</li>
+<li>Cross-platform (Windows, Linux, Mac OS X)</li>
+<li>Minimalistic flat design</li>
+<li>Ultra small size (less than 100KB)</li>
+</ul>
+<h2>Hotkeys</h2>
+<ul>
+<li><strong>Alt+S</strong> - focus to "Search" input</li>
+<li><strong>Alt+C</strong> - focus to "Columns" input</li>
+<li><strong>Ctrl+Space</strong> - autocomplete column name</li>
+<li><strong>Alt+F</strong> - toggle "Filter" mode</li>
+<li><strong>Alt+U</strong> - toggle "Unique" mode</li>
+<li><strong>Alt+O</strong> - show "Open file" dialog</li>
+<li><strong>Alt+E</strong> - show "Export table data" dialog</li>
+<li><strong>Alt+T</strong> - focus to "Truncate" menu</li>
+</ul>
+<h2>Search wildcards</h2>
+<ul>
+<li><strong>?</strong> -  match any single character</li>
+<li>* -  match any string (including the empty string)</li>
+</ul>
+<p>Wildcard characters can be anywhere in the search string, e.g:</p>
+<ul>
+<li><strong>word</strong>* -  starts with "word"</li>
+<li><strong>*word</strong> -  ends with "word"</li>
+<li><strong>*word</strong>* -  contains "word"</li>
+</ul>
+<h2>Search flags</h2>
+<ul>
+<li><strong>~</strong> - enable case-insensitive search</li>
+<li><strong>!</strong> - inverse match</li>
+</ul>
+<p>Flag characters should be at the leading positions in the string, e.g:</p>
+<ul>
+<li><strong>!word</strong> - not equals to "word"</li>
+<li><strong>~word</strong>* - starts with "Word" or "word"</li>
+<li><strong>~!*word</strong>* - not contains "Word" or "word", or "wOrD"</li>
+</ul>
+<h2>Search examples</h2>
+<table>
+<thead>
+<tr>
+<th>Search string</th>
+<th>Match result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*berry</td>
+<td>Match all rows with berries (e.g.: Blueberry, Strawberry, etc.)</td>
+</tr>
+<tr>
+<td>CMSCAT=*THERAPY</td>
+<td>Match all medications with category name ending with "THERAPY" (e.g.: CHEMOTHERAPY, RADIOTHERAPY and HORMONAL THERAPY)</td>
+</tr>
+<tr>
+<td>COLUMN1=VALUE1, COLUMN2=VALUE2, COLUMN3=VALUE3</td>
+<td>Match all rows where (COLUMN1=VALUE1 AND COLUMN2=VALUE2 AND COLUMN3=VALUE3)</td>
+</tr>
+<tr>
+<td>SEX=Male, COUNTRY=USA, DEGREE=Academic</td>
+<td>Match all men from the USA who have an Academic degree</td>
+</tr>
+<tr>
+<td>AGE=6?, AGE=7?</td>
+<td>Match all patients aged 60-70 years old (from 60 to 79)</td>
+</tr>
+<tr>
+<td>COLUMN1=VALUE1, COLUMN1=VALUE2, COLUMN2=VALUE3</td>
+<td>Match all rows where ((COLUMN1=VALUE1 OR COLUMN1=VALUE2) AND COLUMN2=VALUE3)</td>
+</tr>
+<tr>
+<td>SEX=Male, COUNTRY=USA, COUNTRY=Canada, DEGREE=Bachelor, DEGREE=Master</td>
+<td>Match all men from the USA or Canada who have a Bachelor or Master degree</td>
+</tr>
+<tr>
+<td>COUNTRY=!USA</td>
+<td>Match all patients not from the USA</td>
+</tr>
+<tr>
+<td>COUNTRY=!USA, GENDER=~MaLe</td>
+<td>Match all men not from the USA</td>
+</tr>
+</tbody>
+</table>
+<h2>Associate table files with Rocket Table in Windows</h2>
+<p>Just execute this script from the directory where the rocket-table.jar is located:</p>
+<pre><code class="cmd">@where javaw &gt;%TEMP%\rocket-table_javaw.var
+@set /p JAVAW=&lt;%TEMP%\rocket-table_javaw.var
+@del %TEMP%\rocket-table_javaw.var
+
+@reg add HKCU\SOFTWARE\Classes\.csv /d &quot;rocket-table&quot; /f
+@reg add HKCU\SOFTWARE\Classes\.sas7bdat /d &quot;rocket-table&quot; /f
+@reg add HKCU\SOFTWARE\Classes\.sbdf /d &quot;rocket-table&quot; /f
+@reg add HKCU\SOFTWARE\Classes\.stdf /d &quot;rocket-table&quot; /f
+
+@reg add HKCU\SOFTWARE\Classes\rocket-table\shell\open\command /d &quot;\&quot;%JAVAW%\&quot; -jar \&quot;%~dp0rocket-table.jar\&quot; \&quot;%%1\&quot;&quot; /f
+</code></pre>
+
+<h2>Command line parameters</h2>
+<ul>
+<li><strong>--encoding=EncodingName</strong> - specify encoding for input files. E.g.: --encoding=Cp1250</li>
+</ul>
+<h2>Contacts</h2>
+<p>For questions, feature requests or technical support related to this application you can contact
+<a href="mailto:xantorohara@gmail.com">xantorohara@gmail.com</a></p>
+<h2>License</h2>
+<p>Rocket Table binaries by Xantorohara are licensed under a
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.</p>
+<p>Version 1.0.8, published 2015-01-10, updated 2017-03-18</p>
+</body>
+</html>
