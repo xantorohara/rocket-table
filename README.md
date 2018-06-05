@@ -8,12 +8,16 @@ Rocket Table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and
 Rocket Table is a successor of the [SAS Table Explorer](https://github.com/xantorohara/sas-table-explorer) project.
 
 ## Download
-[rocket-table-1.0.9.zip](rocket-table-1.0.9.zip)
+[rocket-table-1.0.10.zip](rocket-table-1.0.10.zip)
 
 ## Changelog
-* 1.0.9 - Added encoding command line parameter
-* 1.0.8 - Added support for STDF (Spotfire Text Data File) format
-* 1.0.7 - Added support for SBDF (Spotfire Binary Data File) format
+* 2018.06.05 v1.0.10 - Updated to Parso v2.0.9
+* 2017.04.05 v1.0.9  - Added encoding command line parameter
+* 2017.03.19 v1.0.7  - Added support for STDF (Spotfire Text Data File) format
+* 2017.03.09 v1.0.6  - Added support for SBDF (Spotfire Binary Data File) format
+* 2016.04.10 v1.0.5  -  Updated to Parso v1.2.1
+* ...
+* 2015.01.10 v1.0.1  -  Initial version
 
 ## Features
 * Open files in SAS7BDAT, SBDF and CSV formats
@@ -106,5 +110,4 @@ For questions, feature requests or technical support related to this application
 Rocket Table binaries by Xantorohara are licensed under a
 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
 
-Version 1.0.8, published 2015-01-10, updated 2017-03-18
-
+Version 1.0.10, published 2015-01-10, updated 2018-06-05
