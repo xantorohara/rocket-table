@@ -5,7 +5,6 @@ Rocket Table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and
 
 ![Rocket Table screenshot](screenshot.png)
 
-Rocket Table is a successor of the [SAS Table Explorer](https://github.com/xantorohara/sas-table-explorer) project.
 
 ## Download
 [rocket-table-1.0.11.zip](rocket-table-1.0.11.zip)
