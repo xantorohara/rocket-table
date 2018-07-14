@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="RocketTable.css"
+            fx:controller="io.github.xantorohara.rocket_table.RocketTable">
+
+    <fx:define>
+        <ContextMenu fx:id="columnsAutocompleteContextMenu"/>
+    </fx:define>
+
+    <top>
+        <ToolBar>
+
+            <Button fx:id="openFileButton" text="Open file" onAction="#openFile"/>
+            <Separator/>
+            <Label text="Search: "/>
+            <TextField fx:id="searchTextField" HBox.hgrow="ALWAYS"
+                       onKeyPressed="#searchTextFieldAutocomplete" contextMenu="$columnsAutocompleteContextMenu"
+                       promptText="Search string or expression, Ctrl+Space for autocomplete"/>
+
+            <CheckBox fx:id="filterCheckbox" text="Filter" onAction="#filterRows"/>
+            <CheckBox fx:id="uniqueCheckbox" text="Unique" onAction="#uniqueRows"/>
+
+            <Separator/>
+
+            <Label text="Columns: "/>
+            <TextField fx:id="columnsTextField" HBox.hgrow="ALWAYS"
+                       onAction="#setColumns" onKeyPressed="#columnsTextFieldAutocomplete"
+                       promptText="Comma-separated list of column names, Ctrl+Space for autocomplete"/>
+            <Button fx:id="columnsSetButton" text="Set" onAction="#setColumns"/>
+
+            <Separator/>
+            <MenuButton fx:id="truncateButton" text="Truncate">
+                <items>
+                    <MenuItem fx:id="truncateViewButton" text="Truncate view" onAction="#truncateView"/>
+                    <MenuItem fx:id="truncateSelectionButton" text="Truncate selection" onAction="#truncateSelection"/>
+                </items>
+            </MenuButton>
+            <Separator/>
+
+            <Button fx:id="exportButton" text="Export" onAction="#exportData"/>
+
+        </ToolBar>
+    </top>
+
+    <center>
+        <TableView fx:id="tableView" editable="true"/>
+    </center>
+
+    <bottom>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="3" right="10" bottom="3" left="5"/>
+            </padding>
+
+            <Hyperlink text="About" onMouseClicked="#showAbout"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label text="Columns:"/>
+            <Label fx:id="columnsCountLabel" minWidth="15"/>
+            <Separator orientation="VERTICAL"/>
+
+            <Label text="Selected rows:"/>
+            <Label fx:id="selectedRowsLabel" minWidth="15"/>
+            <Separator orientation="VERTICAL"/>
+
+            <Label text="Unique rows:"/>
+            <Label fx:id="uniqueRowsLabel" minWidth="15"/>
+            <Separator orientation="VERTICAL"/>
+
+            <Label text="Matched rows:"/>
+            <Label fx:id="matchedRowsLabel" minWidth="15"/>
+            <Separator orientation="VERTICAL"/>
+
+            <Label text="Total rows:"/>
+            <Label fx:id="totalRowsLabel" minWidth="15"/>
+        </HBox>
+    </bottom>
+</BorderPane>

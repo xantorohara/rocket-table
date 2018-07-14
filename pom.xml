@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.github.xantorohara</groupId>
+    <artifactId>rocket-table</artifactId>
+    <version>1.0.12</version>
+
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.spotfire</groupId>
+            <artifactId>sbdf</artifactId>
+            <version>6.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam</groupId>
+            <artifactId>parso</artifactId>
+            <version>2.0.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.opencsv</groupId>-->
+            <!--<artifactId>opencsv</artifactId>-->
+            <!--<version>4.2</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>1.7.0</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>io.github.xantorohara.rocket_table.Main</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <SplashScreen-Image>splash.png</SplashScreen-Image>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>${project.build.finalName}-shade</finalName>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <!--<minimizeJar>true</minimizeJar>-->
+
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/**</exclude>
+                                    </excludes>
+                                </filter>
+
+                                <filter>
+                                    <artifact>com.spotfire:sbdf</artifact>
+                                    <includes>
+                                        <include>com/spotfire/**</include>
+                                    </includes>
+                                </filter>
+
+                                <filter>
+                                    <artifact>com.epam:parso</artifact>
+                                    <includes>
+                                        <include>com/epam/parso/**</include>
+                                    </includes>
+                                </filter>
+                            </filters>
+
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                                    <resource>META-INF/MANIFEST.MF</resource>
+                                    <file>src/main/resources/META-INF/MANIFEST.MF</file>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--https://www.guardsquare.com/en/proguard/manual/usage#keepoptions-->
+            <plugin>
+
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.0.14</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <proguardVersion>6.0.3</proguardVersion>
+                    <obfuscate>true</obfuscate>
+                    <injar>${project.build.finalName}-shade.jar</injar>
+                    <!--<injar>${project.build.finalName}.jar</injar>-->
+                    <!--<includeDependencyInjar>true</includeDependencyInjar>-->
+                    <includeDependency>false</includeDependency>
+                    <outjar>${project.artifactId}.jar</outjar>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+
+                    <libs>
+                        <lib>${java.home}/lib/rt.jar</lib>
+                        <lib>${java.home}/lib/ext/jfxrt.jar</lib>
+                    </libs>
+
+                    <options>
+                        <option>-repackageclasses 'rocket'</option>
+                        <option>-allowaccessmodification</option>
+                        <option>-optimizationpasses 5</option>
+                        <option>-overloadaggressively</option>
+
+                        <!--<option>-keepattributes *Annotation*</option>-->
+                        <!--<option>-keepattributes Signature</option>-->
+                        <!--<option>-keepattributes InnerClasses</option>-->
+
+                        <option>-keepclasseswithmembers,allowobfuscation
+                            public class io.github.xantorohara.rocket_table.Main {
+                            public static void main(java.lang.String[]);
+                            }
+                        </option>
+                        <option>-keepclassmembers
+                            public class io.github.xantorohara.rocket_table.RocketTable {
+                            @javafx.fxml.FXML *;
+                            }
+                        </option>
+                        <option>-adaptresourcefilecontents **.fxml,**.properties,META-INF/MANIFEST.MF</option>
+                        <option>-dontwarn</option>
+
+                    </options>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0</version>
+
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptors>
+                        <descriptor>assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+

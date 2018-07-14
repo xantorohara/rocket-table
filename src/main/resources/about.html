@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            font-family: Geneva, Arial, Helvetica, sans-serif;
+            font-size: small;
+        }
+
+        .bl-20 {
+            font-weight: bold;
+            min-width: 20px;
+        }
+
+        .bl-60 {
+            font-weight: bold;
+            min-width: 60px;
+        }
+
+        .hotkey {
+            color: blueviolet;
+            min-width: 80px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li span {
+            display: inline-block;
+        }
+
+        textarea.code {
+            width: 100%;
+            height: 200px;
+            overflow: auto;
+            font-family: Monospaced, monospace;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+<h2>Hotkeys</h2>
+<ul>
+    <li><span class="hotkey">Alt+S</span> focus to "Search" input</li>
+    <li><span class="hotkey">Alt+C</span> focus to "Columns" input</li>
+    <li><span class="hotkey">Ctrl+Space</span> autocomplete column name</li>
+    <li><span class="hotkey">Alt+F</span> toggle "Filter" mode</li>
+    <li><span class="hotkey">Alt+U</span> toggle "Unique" mode</li>
+    <li><span class="hotkey">Alt+O</span> show "Open file" dialog</li>
+    <li><span class="hotkey">Alt+E</span> show "Export table data" dialog</li>
+    <li><span class="hotkey">Alt+T</span> focus to "Truncate" menu</li>
+</ul>
+<br/>
+
+<h2>Search wildcards</h2>
+<ul>
+    <li><span class="bl-20">?</span> match any single character</li>
+    <li><span class="bl-20">*</span> match any string (including the empty string)</li>
+</ul>
+<p> Wildcard characters can be anywhere in the search string, e.g:</p>
+
+<ul>
+    <li><span class="bl-60">word*</span> starts with "word"</li>
+    <li><span class="bl-60">*word</span> ends with "word"</li>
+    <li><span class="bl-60">*word*</span> contains "word"</li>
+</ul>
+<br/>
+
+<h2>Search flags</h2>
+<ul>
+    <li><span class="bl-20">~</span> enable case-insensitive search</li>
+    <li><span class="bl-20">!</span> inverse match</li>
+</ul>
+<p>Flag characters should be at the leading positions in the string, e.g:</p>
+
+<ul>
+    <li><span class="bl-60">!word</span> not equals to "word"</li>
+    <li><span class="bl-60">~word*</span> starts with "Word" or "word"</li>
+    <li><span class="bl-60">~!*word*</span> not contains "Word" or "word", or "wOrD"</li>
+</ul>
+<br/>
+
+<h2>Associate table files with Rocket Table in Windows</h2>
+<p>Just execute this script from the directory where the rocket-table.jar is located</p>
+
+<textarea class="code">
+@where javaw >%TEMP%\rocket-table_javaw.var
+@set /p JAVAW=<%TEMP%\rocket-table_javaw.var
+@del %TEMP%\rocket-table_javaw.var
+
+@reg add HKCU\SOFTWARE\Classes\.csv /d "rocket-table" /f
+@reg add HKCU\SOFTWARE\Classes\.sas7bdat /d "rocket-table" /f
+@reg add HKCU\SOFTWARE\Classes\.sbdf /d "rocket-table" /f
+@reg add HKCU\SOFTWARE\Classes\.stdf /d "rocket-table" /f
+
+@reg add HKCU\SOFTWARE\Classes\rocket-table\shell\open\command /d "\"%JAVAW%\" -jar \"%~dp0rocket-table.jar\" \"%%1\"" /f
+</textarea>
+
+<h2>Command line parameters</h2>
+<ul>
+    <li>
+        <span class="bl-60">--encoding=EncodingName</span> specify encoding for input files.
+        E.g.: --encoding=Cp1250
+    </li>
+</ul>
+
+<h2>Libraries used</h2>
+<ul>
+    <li> Parso v2.0.9</li>
+    <li> SBDF v6.5.0</li>
+</ul>
+
+<h2>Contacts</h2>
+
+<p>
+    For questions, feature requests or technical support related to this application you can contact me:
+    <a href="mailto:xantorohara@gmail.com" target="_blank">xantorohara@gmail.com</a>
+</p>
+
+<h2>License</h2>
+<p>
+    Apache License v2.0
+</p>
+
+</body>
+</html>

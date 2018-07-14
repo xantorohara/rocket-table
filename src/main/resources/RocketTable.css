@@ -1,0 +1,56 @@
+.table-cell {
+    -fx-border-width: 0 1 1 0;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-border-color: #ccc;
+}
+
+.table-view .table-cell.-xfx-rownum,
+.table-view .table-row-cell:selected .table-cell:filled.-xfx-rownum {
+    -fx-background-color: -fx-body-color-to-right;
+    -fx-border-color: darkgray;
+    -fx-text-fill: #333333;
+}
+
+.table-cell.-xfx-row-matched {
+    -fx-background-color: #ffffcc;
+}
+
+.table-cell.-xfx-cell-matched {
+    -fx-background-color: linear-gradient(to bottom, #ffff80, #ffef40);
+}
+
+.table-view .table-row-cell:filled:selected,
+.table-view:focused .table-row-cell:filled:selected {
+    -fx-background-color: linear-gradient(to bottom, #337fca, #0060c0);
+    -fx-table-cell-border-color: white;
+}
+
+.table-view .table-row-cell:selected .table-cell:filled,
+.table-view:focused .table-row-cell:selected .table-cell:filled {
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-text-fill: #fff;
+    -fx-border-color: #fff;
+    -fx-background-color: linear-gradient(to bottom, #337fca, #0060c0);
+}
+
+.table-view .table-row-cell:selected .table-cell:filled.-xfx-row-matched,
+.table-view:focused .table-row-cell:selected .table-cell:filled.-xfx-row-matched {
+    -fx-background-color: linear-gradient(to bottom, #40a0ff, #0080ff);
+    -fx-text-fill: #fff;
+    -fx-border-color: #fff;
+}
+
+.table-view .table-row-cell:selected .table-cell:filled.-xfx-cell-matched,
+.table-view:focused .table-row-cell:selected .table-cell:filled.-xfx-cell-matched {
+    -fx-background-color: linear-gradient(to bottom, #ffb840, #ffa000);
+    -fx-text-fill: #333;
+    -fx-border-color: #fff;
+}
+
+.copyable-label, .copyable-label:focused {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}

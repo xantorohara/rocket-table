@@ -3,19 +3,19 @@
 ## About
 Rocket Table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and CSV formats.
 
-![Rocket Table screenshot](screenshot.png)
-
+![Rocket Table screenshot](https://xantorohara.github.io/rocket-table/screenshot.png)
 
 ## Download
-[rocket-table-1.0.11.zip](rocket-table-1.0.11.zip)
+[rocket-table-1.0.12.zip](https://xantorohara.github.io/rocket-table/rocket-table-1.0.12.zip)
 
 ## Changelog
+* 2018.07.14 v1.0.12 - Published sources
 * 2018.06.08 v1.0.11 - Changed license to Apache License v2.0
 * 2018.06.05 v1.0.10 - Updated to Parso v2.0.9
 * 2017.04.05 v1.0.9  - Added encoding command line parameter
 * 2017.03.19 v1.0.7  - Added support for STDF (Spotfire Text Data File) format
 * 2017.03.09 v1.0.6  - Added support for SBDF (Spotfire Binary Data File) format
-* 2016.04.10 v1.0.5  -  Updated to Parso v1.2.1
+* 2016.04.10 v1.0.5  - Updated to Parso v1.2.1
 * ...
 * 2015.01.10 v1.0.1  -  Initial version
 
@@ -109,8 +109,15 @@ Just execute this script from the directory where the rocket-table.jar is locate
 For questions, feature requests or technical support related to this application you can contact
 [xantorohara@gmail.com](mailto:xantorohara@gmail.com)
 
+## Build
+
+1. Clone or download [Rocket Table repository](https://github.com/xantorohara/rocket-table)
+2. Build it using maven:
+```bash
+mvn clean package
+```
 
 ## License
-Rocket Table binaries by Xantorohara are licensed under Apache License v2.0.
+Rocket Table by Xantorohara are licensed under Apache License v2.0.
 
-Version 1.0.11, published 2015-01-10, updated 2018-06-08
+Version 1.0.12, published 2015-01-10, updated 2018-07-14

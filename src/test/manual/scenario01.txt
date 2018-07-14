@@ -1,0 +1,44 @@
+- open MOCK_DATA.csv
+! check unique=1000, matched=0, total=1000
+
+- search: USA
+! check unique=1000, matched=0, total=1000
+# cat MOCK_DATA.csv | grep USA | wc -l
+
+
+- search: COUNTRY=USA, GENDER=~MALE
+! check unique=1000, matched=159, total=1000
+# cat MOCK_DATA.csv | grep USA | grep -i ,MALE | wc -l
+
+- check "Filter"
+check unique=159, matched=159, total=1000 
+
+- check "Unique"
+! check unique=159, matched=159, total=1000 
+
+- set columns: COUNTRY, GENDER
+! check unique=1, matched=159, total=1000 
+
+- uncheck "Unique"
+! check unique=1, matched=159, total=1000
+
+- uncheck "Filter"
+! check unique=6, matched=159, total=1000
+# cat MOCK_DATA.csv | cut -f 1,2 -d ',' | sort | uniq | wc -l
+
+- check "Unique"
+! check unique=6, matched=159, total=1000 
+
+- do "Truncate View", export to "1.csv"
+! check unique=6, matched=1, total=6
+
+- search: Male
+! check unique=6, matched=3, total=6
+
+- select first two rows, do "Truncate Selection", export to "2.csv"
+
+- close application
+
+- open 1.csv via doubleclick on file
+- open 2.csv via "Open file"
+

@@ -1,0 +1,100 @@
+package io.github.xantorohara.rocket_table;
+
+import io.github.xantorohara.rocket_table.readers.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Logger;
+
+public class TableResource {
+    private static final Logger log = Logger.getLogger("rocket_table");
+
+    private SmartColumns columns;
+
+    private List<SmartRow> data;
+
+    public List<SmartRow> getData() {
+        return data;
+    }
+
+    public void setData(List<SmartRow> data) {
+        this.data = data;
+    }
+
+    public SmartColumns getColumns() {
+        return columns;
+    }
+
+    public void setColumns(SmartColumns columns) {
+        this.columns = columns;
+    }
+
+    private String[] convert(Object[] row) {
+        String[] out = row instanceof String[] ? (String[]) row : new String[row.length];
+
+        for (int i = 0; i < row.length && i < columns.getCount(); i++) {
+            Class type = null;
+            if (row[i] == null) {
+                out[i] = "";
+            } else if (row[i] instanceof Boolean) {
+                out[i] = (boolean) row[i] ? "TRUE" : "FALSE";
+                type = String.class;
+            } else if (row[i] instanceof Date) {
+                out[i] = SmartUtils.toString((Date) row[i]);
+                type = String.class;
+            } else {
+                if (row[i] instanceof String) {
+                    out[i] = (String) row[i];
+                } else {
+                    out[i] = row[i].toString();
+                }
+                if (columns.getType(i) == null || columns.getType(i) == Number.class) {
+                    if (row[i] instanceof Number) {
+                        type = Number.class;
+                    } else {
+                        try {
+                            double ignore = Double.parseDouble(out[i]);
+                            type = Number.class;
+                        } catch (NumberFormatException e) {
+                            type = String.class;
+                        }
+                    }
+                }
+            }
+            columns.setType(i, type);
+        }
+        return out;
+    }
+
+    public void read(File file, String encoding) throws IOException {
+        columns = null;
+        data = new ArrayList<>();
+
+        String fileName = file.getName();
+
+        Reader reader = null;
+        if (fileName.endsWith(".sas7bdat")) {
+            reader = new SasReader();
+        } else if (fileName.endsWith(".sbdf")) {
+            reader = new SbdfReader();
+        } else if (fileName.endsWith(".stdf")) {
+            reader = new StdfReader();
+        } else if (fileName.endsWith(".csv")) {
+            reader = new CsvReader();
+        }
+
+        if (reader != null) {
+            AtomicInteger i = new AtomicInteger();
+            reader.read(file, encoding,
+                    cols -> columns = new SmartColumns(cols),
+                    row -> data.add(new SmartRow(i.getAndIncrement(), convert(row)))
+            );
+        }
+
+        log.info("Loaded records: " + data.size());
+    }
+}
