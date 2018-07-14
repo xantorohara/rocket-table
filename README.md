@@ -32,7 +32,7 @@ Rocket Table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and
 * Count total, matched, selected and unique rows
 * Cross-platform (Windows, Linux, Mac OS X)
 * Minimalistic flat design
-* Ultra small size (less than 100KB)
+* Small application size (around 100KB)
 
 ## Hotkeys
 
