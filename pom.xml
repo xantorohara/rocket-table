@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.xantorohara</groupId>
     <artifactId>rocket-table</artifactId>
-    <version>1.0.12</version>
+    <version>1.1.1</version>
 
     <packaging>jar</packaging>
 
@@ -18,6 +18,19 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.spotfire</groupId>
             <artifactId>sbdf</artifactId>
             <version>6.5.0</version>
@@ -26,7 +39,7 @@
         <dependency>
             <groupId>com.epam</groupId>
             <artifactId>parso</artifactId>
-            <version>2.0.9</version>
+            <version>2.0.11</version>
         </dependency>
 
         <dependency>
@@ -35,29 +48,29 @@
             <version>1.7.25</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>com.opencsv</groupId>-->
-            <!--<artifactId>opencsv</artifactId>-->
-            <!--<version>4.2</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.2.3</version>
+        </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.25</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>1.7.0</version>
+            <version>3.11.1</version>
             <scope>test</scope>
         </dependency>
 
@@ -67,7 +80,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -77,15 +90,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>3.1.1</version>
                 <configuration>
                     <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>io.github.xantorohara.rocket_table.Main</mainClass>
-                        </manifest>
                         <manifestEntries>
                             <SplashScreen-Image>splash.png</SplashScreen-Image>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                            <Main-Class>io.github.xantorohara.rocket_table.Main</Main-Class>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -94,7 +105,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -102,9 +113,9 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <finalName>${project.build.finalName}-shade</finalName>
+                            <finalName>${project.artifactId}</finalName>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <!--<minimizeJar>true</minimizeJar>-->
+                            <minimizeJar>true</minimizeJar>
 
                             <filters>
                                 <filter>
@@ -112,20 +123,6 @@
                                     <excludes>
                                         <exclude>META-INF/**</exclude>
                                     </excludes>
-                                </filter>
-
-                                <filter>
-                                    <artifact>com.spotfire:sbdf</artifact>
-                                    <includes>
-                                        <include>com/spotfire/**</include>
-                                    </includes>
-                                </filter>
-
-                                <filter>
-                                    <artifact>com.epam:parso</artifact>
-                                    <includes>
-                                        <include>com/epam/parso/**</include>
-                                    </includes>
                                 </filter>
                             </filters>
 
@@ -141,66 +138,10 @@
                 </executions>
             </plugin>
 
-            <!--https://www.guardsquare.com/en/proguard/manual/usage#keepoptions-->
-            <plugin>
-
-                <groupId>com.github.wvengen</groupId>
-                <artifactId>proguard-maven-plugin</artifactId>
-                <version>2.0.14</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>proguard</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <proguardVersion>6.0.3</proguardVersion>
-                    <obfuscate>true</obfuscate>
-                    <injar>${project.build.finalName}-shade.jar</injar>
-                    <!--<injar>${project.build.finalName}.jar</injar>-->
-                    <!--<includeDependencyInjar>true</includeDependencyInjar>-->
-                    <includeDependency>false</includeDependency>
-                    <outjar>${project.artifactId}.jar</outjar>
-                    <outputDirectory>${project.build.directory}</outputDirectory>
-
-                    <libs>
-                        <lib>${java.home}/lib/rt.jar</lib>
-                        <lib>${java.home}/lib/ext/jfxrt.jar</lib>
-                    </libs>
-
-                    <options>
-                        <option>-repackageclasses 'rocket'</option>
-                        <option>-allowaccessmodification</option>
-                        <option>-optimizationpasses 5</option>
-                        <option>-overloadaggressively</option>
-
-                        <!--<option>-keepattributes *Annotation*</option>-->
-                        <!--<option>-keepattributes Signature</option>-->
-                        <!--<option>-keepattributes InnerClasses</option>-->
-
-                        <option>-keepclasseswithmembers,allowobfuscation
-                            public class io.github.xantorohara.rocket_table.Main {
-                            public static void main(java.lang.String[]);
-                            }
-                        </option>
-                        <option>-keepclassmembers
-                            public class io.github.xantorohara.rocket_table.RocketTable {
-                            @javafx.fxml.FXML *;
-                            }
-                        </option>
-                        <option>-adaptresourcefilecontents **.fxml,**.properties,META-INF/MANIFEST.MF</option>
-                        <option>-dontwarn</option>
-
-                    </options>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.1</version>
 
                 <configuration>
                     <appendAssemblyId>false</appendAssemblyId>

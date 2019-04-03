@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Open in Excel",
+    "exec": "excel",
+    "args": "my-table.csv",
+    "input": "my-table.csv"
+  },
+  {
+    "name": "Open in Notepad",
+    "exec": "notepad",
+    "args": "input.csv",
+    "input": "input.csv"
+  }
+]

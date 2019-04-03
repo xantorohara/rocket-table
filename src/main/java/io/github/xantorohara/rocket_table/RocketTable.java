@@ -21,7 +21,6 @@ import javafx.stage.StageStyle;
 import javafx.util.converter.DefaultStringConverter;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
@@ -29,13 +28,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import static javafx.scene.input.KeyCombination.keyCombination;
 
 public class RocketTable implements Initializable {
     private static final Logger log = Logger.getLogger("rocket_table");
 
-    public static final String VERSION = "Rocket Table v1.0.12";
+    public static final String VERSION = "Rocket Table v1.1.1";
 
     @FXML
     public Label columnsCountLabel;
@@ -52,6 +52,10 @@ public class RocketTable implements Initializable {
     public Button openFileButton;
     @FXML
     public Button columnsSetButton;
+
+    @FXML
+    public MenuButton programsButton;
+
     @FXML
     public Button exportButton;
     @FXML
@@ -93,7 +97,7 @@ public class RocketTable implements Initializable {
     }
 
     @FXML
-    public void showAbout() throws IOException {
+    public void showAbout() {
         Alert dialog = new Alert(Alert.AlertType.INFORMATION);
         dialog.setTitle("About Rocket Table");
         dialog.initStyle(StageStyle.UTILITY);
@@ -205,7 +209,42 @@ public class RocketTable implements Initializable {
 
         initActions();
         initBindings();
+        initPrograms();
     }
+
+    private void initPrograms() {
+
+        List<Programs.Program> programs = Programs.loadProcessors();
+
+        programsButton.getItems().setAll(
+                programs.stream().map(program -> {
+                    MenuItem menuItem = new MenuItem(program.getName());
+                    menuItem.setOnAction(event -> {
+                        runProcessor(program);
+                    });
+                    return menuItem;
+                }).collect(Collectors.toList())
+        );
+    }
+
+    private void runProcessor(Programs.Program program) {
+
+        final File inputFile = new File("processors/input.csv");
+        final File resultFile = new File("processors/result.csv");
+
+        inputFile.delete();
+        resultFile.delete();
+        if (program.isInput() && tableModel.getColumns() != null) {
+            tableModel.export(inputFile);
+        }
+
+        Programs.exec(program);
+
+        if (program.isResult()) {
+            openFile(resultFile);
+        }
+    }
+
 
     private void initHotkeys() {
         ObservableMap<KeyCombination, Runnable> accelerators = stage.getScene().getAccelerators();

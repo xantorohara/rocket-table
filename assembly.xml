@@ -7,8 +7,6 @@
         <format>zip</format>
     </formats>
 
-    <includeBaseDirectory>false</includeBaseDirectory>
-
     <fileSets>
         <fileSet>
             <directory>${project.build.directory}</directory>
@@ -23,6 +21,14 @@
             <outputDirectory>.</outputDirectory>
             <includes>
                 <include>rocket-table-associate-files.cmd</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>demo</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>programs.json</include>
             </includes>
         </fileSet>
 
