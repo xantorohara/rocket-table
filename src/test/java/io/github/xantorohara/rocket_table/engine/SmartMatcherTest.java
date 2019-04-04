@@ -1,7 +1,5 @@
 package io.github.xantorohara.rocket_table.engine;
 
-import io.github.xantorohara.rocket_table.engine.SmartMatcher;
-import io.github.xantorohara.rocket_table.engine.SmartPattern;
 import org.junit.Test;
 
 import java.util.Map;

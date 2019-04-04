@@ -4,12 +4,11 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(of = "values")
 public class SmartRow {
+    private static final int MAX_MATCH_COLUMNS = 64;
     private int id;
     private String[] values;
     private long mask;
     private boolean matched;
-
-    private static final int MAX_MATCH_COLUMNS = 64;
 
     public SmartRow(int id, String[] values) {
         this.id = id;
@@ -61,11 +60,6 @@ public class SmartRow {
         return matched;
     }
 
-    public void setMatched() {
-        matched = true;
-        mask = 0xffffffffffffffffL;
-    }
-
     public void setMatched(int columnNumber) {
         if (columnNumber < 0 || columnNumber >= values.length) {
             throw new IndexOutOfBoundsException();
@@ -74,6 +68,11 @@ public class SmartRow {
         if (columnNumber < MAX_MATCH_COLUMNS) {
             mask |= 1L << columnNumber;
         }
+    }
+
+    public void setMatched() {
+        matched = true;
+        mask = 0xffffffffffffffffL;
     }
 
     public void clearMatched() {

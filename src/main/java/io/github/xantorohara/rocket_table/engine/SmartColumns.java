@@ -13,14 +13,6 @@ public class SmartColumns {
     private String[] names;
     private Class[] types;
 
-    public Class getType(int columnNumber) {
-        return types[columnNumber];
-    }
-
-    public int getCount() {
-        return names.length;
-    }
-
     public SmartColumns(String[] names) {
         this.names = names;
         this.types = new Class[names.length];
@@ -29,6 +21,14 @@ public class SmartColumns {
     private SmartColumns(String[] names, Class[] types) {
         this.names = names;
         this.types = types;
+    }
+
+    public Class getType(int columnNumber) {
+        return types[columnNumber];
+    }
+
+    public int getCount() {
+        return names.length;
     }
 
     public SmartColumns map(int... columnNumbers) {

@@ -2,15 +2,13 @@ package io.github.xantorohara.rocket_table.engine;
 
 import org.junit.Test;
 
-import java.io.IOException;
-
 /**
  * Check matching, filtering and distincts
  */
 public class TableModelTestAbcUniqueRows extends TableModelTestAbc {
 
     @Test
-    public void testUniqueRows() throws IOException {
+    public void testUniqueRows() {
         model.search("*");
         assertModelData(model, CSV_DATA);
         assertMatchedRows(model, ALL_MATCHED);

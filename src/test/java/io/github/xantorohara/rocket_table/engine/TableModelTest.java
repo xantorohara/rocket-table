@@ -1,8 +1,5 @@
 package io.github.xantorohara.rocket_table.engine;
 
-import io.github.xantorohara.rocket_table.engine.SmartRow;
-import io.github.xantorohara.rocket_table.engine.TableModel;
-
 import java.util.ArrayList;
 import java.util.List;
 

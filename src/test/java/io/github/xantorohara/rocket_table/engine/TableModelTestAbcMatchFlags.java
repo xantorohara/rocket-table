@@ -2,15 +2,13 @@ package io.github.xantorohara.rocket_table.engine;
 
 import org.junit.Test;
 
-import java.io.IOException;
-
 /**
  * Check case-sensitive and inverse flags
  */
 public class TableModelTestAbcMatchFlags extends TableModelTestAbc {
 
     @Test
-    public void test1() throws IOException {
+    public void test1() {
         model.search("~*");
         assertMatchedRows(model, ALL_MATCHED);
 
@@ -25,7 +23,7 @@ public class TableModelTestAbcMatchFlags extends TableModelTestAbc {
     }
 
     @Test
-    public void test2() throws IOException {
+    public void test2() {
         model.search("a");
         assertMatchedRows(model, 402, 403, 404, 405, 410);
 

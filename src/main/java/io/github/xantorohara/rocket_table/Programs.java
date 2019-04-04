@@ -15,15 +15,6 @@ import java.util.List;
 @Slf4j
 public class Programs {
 
-    @Value
-    public static class Program {
-        private String name;
-        private String exec;
-        private String args;
-        private boolean input;
-        private boolean result;
-    }
-
     @SneakyThrows
     public static List<Program> loadProcessors() {
         log.info("Loading processors");
@@ -38,7 +29,6 @@ public class Programs {
         }
     }
 
-
     @SneakyThrows
     public static void exec(Program program) {
         ProcessBuilder processBuilder = new ProcessBuilder()
@@ -48,5 +38,14 @@ public class Programs {
 
         Process process = processBuilder.start();
         process.waitFor();
+    }
+
+    @Value
+    public static class Program {
+        private String name;
+        private String exec;
+        private String args;
+        private boolean input;
+        private boolean result;
     }
 }

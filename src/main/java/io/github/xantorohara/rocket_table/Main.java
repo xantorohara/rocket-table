@@ -9,12 +9,15 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 
 public class Main extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     public void start(Stage stage) throws Exception {
         stage.getIcons().addAll(new Image("icon.png"));
@@ -42,9 +45,5 @@ public class Main extends Application {
         if (splashScreen != null) {
             splashScreen.close();
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        launch(args);
     }
 }
