@@ -1,15 +1,17 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
-import java.util.Arrays;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
 import java.util.stream.IntStream;
 
+@Getter
+@ToString(of = "names")
+@EqualsAndHashCode(of = "names")
 public class SmartColumns {
     private String[] names;
     private Class[] types;
-
-    public String[] getNames() {
-        return names;
-    }
 
     public Class getType(int columnNumber) {
         return types[columnNumber];
@@ -40,19 +42,7 @@ public class SmartColumns {
      */
     public void setType(int columnNumber, Class type) {
         if (types[columnNumber] != String.class) {
-            types[columnNumber] = type == String.class ? String.class : type;
+            types[columnNumber] = type;
         }
-    }
-
-    public boolean equals(Object o) {
-        return this == o || (getClass() == o.getClass() && Arrays.equals(names, ((SmartColumns) o).names));
-    }
-
-    public int hashCode() {
-        return Arrays.hashCode(names);
-    }
-
-    public String toString() {
-        return Arrays.toString(names);
     }
 }

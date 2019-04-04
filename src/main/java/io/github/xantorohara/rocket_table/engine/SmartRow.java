@@ -1,7 +1,8 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
-import java.util.Arrays;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(of = "values")
 public class SmartRow {
     private int id;
     private String[] values;
@@ -85,13 +86,5 @@ public class SmartRow {
             throw new IndexOutOfBoundsException();
         }
         return matched && columnNumber < MAX_MATCH_COLUMNS && (mask | (1L << columnNumber)) == mask;
-    }
-
-    public boolean equals(Object o) {
-        return this == o || !(o == null || getClass() != o.getClass()) && Arrays.equals(values, ((SmartRow) o).values);
-    }
-
-    public int hashCode() {
-        return Arrays.hashCode(values);
     }
 }

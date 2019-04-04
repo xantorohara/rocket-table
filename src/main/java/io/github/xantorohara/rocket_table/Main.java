@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.LogManager;
 
 
 public class Main extends Application {
@@ -46,9 +45,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        LogManager.getLogManager().readConfiguration(
-                Main.class.getClassLoader().getResourceAsStream("RocketTable-logger.properties"));
-
         launch(args);
     }
 }

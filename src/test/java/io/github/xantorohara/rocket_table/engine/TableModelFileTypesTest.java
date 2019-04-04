@@ -1,5 +1,6 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
+import io.github.xantorohara.rocket_table.engine.TableModel;
 import org.junit.Test;
 
 import java.io.File;

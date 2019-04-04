@@ -1,5 +1,7 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
+import io.github.xantorohara.rocket_table.engine.SmartRow;
+import io.github.xantorohara.rocket_table.engine.TableModel;
 import org.junit.Before;
 import org.junit.Test;
 

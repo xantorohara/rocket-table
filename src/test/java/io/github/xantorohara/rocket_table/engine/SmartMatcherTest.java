@@ -1,5 +1,7 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
+import io.github.xantorohara.rocket_table.engine.SmartMatcher;
+import io.github.xantorohara.rocket_table.engine.SmartPattern;
 import org.junit.Test;
 
 import java.util.Map;
@@ -39,7 +41,7 @@ public class SmartMatcherTest {
     public void testDualFieldPattern() {
         Map<String, Set<SmartPattern>> result = SmartMatcher.splitSearchString("ABC=123,ABC=456");
         assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get("ABC")).extracting("string").containsExactly("123", "456");
+        assertThat(result.get("ABC")).extracting("string").containsExactlyInAnyOrder("123", "456");
     }
 
     @Test
@@ -55,7 +57,7 @@ public class SmartMatcherTest {
     public void testColumnShouldBeUppercase() {
         Map<String, Set<SmartPattern>> result = SmartMatcher.splitSearchString("ABC=123, Abc=456, abc=789, test=test");
         assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get("ABC")).extracting("string").containsExactly("123", "456", "789");
+        assertThat(result.get("ABC")).extracting("string").containsExactlyInAnyOrder("123", "456", "789");
         assertThat(result.get("TEST")).extracting("string").containsExactly("test");
     }
 

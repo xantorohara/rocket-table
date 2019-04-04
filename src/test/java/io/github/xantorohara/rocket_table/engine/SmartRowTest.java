@@ -1,5 +1,6 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
+import io.github.xantorohara.rocket_table.engine.SmartRow;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,5 +1,9 @@
 package io.github.xantorohara.rocket_table;
 
+import io.github.xantorohara.rocket_table.engine.SmartColumns;
+import io.github.xantorohara.rocket_table.engine.SmartRow;
+import io.github.xantorohara.rocket_table.engine.SmartWatch;
+import io.github.xantorohara.rocket_table.engine.TableModel;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableMap;
@@ -19,6 +23,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.converter.DefaultStringConverter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -27,13 +32,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static javafx.scene.input.KeyCombination.keyCombination;
 
+@Slf4j
 public class RocketTable implements Initializable {
-    private static final Logger log = Logger.getLogger("rocket_table");
 
     public static final String VERSION = "Rocket Table v1.1.1";
 

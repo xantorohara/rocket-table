@@ -1,9 +1,9 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
-import java.util.logging.Logger;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class SmartWatch {
-    private static final Logger log = Logger.getLogger("rocket_table");
 
     private String name;
     private long time = System.currentTimeMillis();
@@ -17,6 +17,6 @@ public class SmartWatch {
     }
 
     public void stop() {
-        log.info(name + ": " + (System.currentTimeMillis() - time));
+        log.info("[{}]: [{}]", name, System.currentTimeMillis() - time);
     }
 }

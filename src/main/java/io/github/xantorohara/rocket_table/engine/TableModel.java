@@ -1,10 +1,11 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
 import au.com.bytecode.opencsv.CSVWriter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,14 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
+@Slf4j
 public class TableModel {
-    private static final Logger log = Logger.getLogger("rocket_table");
 
+    //todo make private
     public final IntegerProperty matchedRowCountProperty = new SimpleIntegerProperty();
     public final IntegerProperty uniqueRowCountProperty = new SimpleIntegerProperty();
     public final IntegerProperty totalRowCountProperty = new SimpleIntegerProperty();
@@ -58,7 +59,7 @@ public class TableModel {
     }
 
     public void load(File file, String encoding) throws IOException {
-        log.info("Load: " + file);
+        log.info("Load [{}]", file);
         tableResource = new TableResource();
         tableResource.read(file, encoding);
         reset();
@@ -154,7 +155,7 @@ public class TableModel {
     }
 
     public void search(String searchString, boolean filterRows) {
-        log.info("Search: " + searchString);
+        log.info("Search [{}]", searchString);
         this.filterRows = filterRows;
         if (tableResource == null) {
             return;
@@ -253,7 +254,7 @@ public class TableModel {
         }
 
         matchedRowCountProperty.set(matchedRowCount);
-        log.info("Matched records: " + matchedRowCount);
+        log.info("Matched [{}] records", matchedRowCount);
     }
 
     public void export(File file) {
