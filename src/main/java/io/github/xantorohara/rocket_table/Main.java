@@ -20,9 +20,12 @@ public class Main extends Application {
     }
 
     public void start(Stage stage) throws Exception {
-        stage.getIcons().addAll(new Image("icon.png"));
-        stage.setTitle(RocketTable.VERSION);
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("RocketTable.fxml"));
+        stage.setTitle(Const.VERSION);
+
+        stage.getIcons().addAll(new Image(getClass().getResourceAsStream("icon.png")));
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RocketTable.fxml"));
         Parent root = loader.load();
         RocketTable controller = loader.getController();
 

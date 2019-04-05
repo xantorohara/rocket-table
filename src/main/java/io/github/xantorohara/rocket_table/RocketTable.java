@@ -116,7 +116,7 @@ public class RocketTable implements Initializable {
         webView.setPrefWidth(500);
         webView.setPrefHeight(300);
         WebEngine engine = webView.getEngine();
-        engine.load(getClass().getClassLoader().getResource("about.html").toExternalForm());
+        engine.load(getClass().getResource("about.html").toExternalForm());
         dialog.getDialogPane().setContent(webView);
         dialog.showAndWait();
     }
@@ -412,7 +412,7 @@ public class RocketTable implements Initializable {
     }
 
     public void openFile(File file) {
-        stage.setTitle(file.getName() + " - " + VERSION);
+        stage.setTitle(file.getName() + " - " + Const.VERSION);
 
         internalChange = true;
         searchTextField.clear();

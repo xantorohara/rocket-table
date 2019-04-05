@@ -3,7 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="RocketTable.css"
+<BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@RocketTable.css"
             fx:controller="io.github.xantorohara.rocket_table.RocketTable">
 
     <fx:define>
