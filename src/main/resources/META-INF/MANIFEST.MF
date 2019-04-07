@@ -1,3 +1,0 @@
-Main-Class: io.github.xantorohara.rocket_table.Main
-SplashScreen-Image: splash.png
-

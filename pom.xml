@@ -89,19 +89,6 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Implementation-Version>${project.version}</Implementation-Version>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.1</version>
                 <executions>
@@ -127,9 +114,13 @@
 
                             <transformers>
                                 <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
-                                    <resource>META-INF/MANIFEST.MF</resource>
-                                    <file>src/main/resources/META-INF/MANIFEST.MF</file>
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <manifestEntries>
+                                        <Main-Class>io.github.xantorohara.rocket_table.Main</Main-Class>
+                                        <Implementation-Version>${project.version}</Implementation-Version>
+                                        <SplashScreen-Image>io/github/xantorohara/rocket_table/splash.png
+                                        </SplashScreen-Image>
+                                    </manifestEntries>
                                 </transformer>
                             </transformers>
                         </configuration>
