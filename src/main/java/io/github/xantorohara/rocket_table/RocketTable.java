@@ -76,21 +76,9 @@ public class RocketTable {
         log.info("Init started");
         this.stage = stage;
 
-        openFileChooser.setInitialDirectory(new File("."));
-        openFileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Supported Files", "*.sas7bdat", "*.sbdf", "*.stdf", "*.csv"),
-                new FileChooser.ExtensionFilter("SAS File (SAS7BDAT)", "*.sas7bdat"),
-                new FileChooser.ExtensionFilter("Spotfire Binary Data File (SBDF)", "*.sbdf"),
-                new FileChooser.ExtensionFilter("Spotfire Text Data File (STDF)", "*.stdf"),
-                new FileChooser.ExtensionFilter("CSV File", "*.csv")
-        );
-
-        exportFileChooser.setTitle("Export table data");
-        exportFileChooser.setInitialDirectory(new File("."));
-        exportFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV file", "*.csv"));
-
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+        initFileChoosers();
         initHotkeys();
         initActions();
         initBindings();
@@ -102,7 +90,7 @@ public class RocketTable {
         Alert dialog = new Alert(Alert.AlertType.INFORMATION);
         dialog.setTitle("About Rocket Table");
         dialog.initStyle(StageStyle.UTILITY);
-        dialog.setHeaderText("Rocket Table is a lightweight viewer for " +
+        dialog.setHeaderText("\"Rocket table\" is a lightweight viewer for " +
                 "SAS (.*sas7bdat), Spotfire (.sbdf, * stdf) and CSV files.\n" +
                 "© Xantorohara, 2015-2019"
         );
@@ -184,12 +172,11 @@ public class RocketTable {
 
     private void initPrograms() {
 
-
         List<Program> programs;
         try {
             programs = Programs.loadPrograms();
         } catch (IOException e) {
-            showExceptionDialog(e);
+            showExceptionDialog("Can't load programs", e);
             return;
         }
 
@@ -222,7 +209,12 @@ public class RocketTable {
         }
 
         if (program.getCmd() != null) {
-            Programs.exec(program);
+            try {
+                Programs.exec(program);
+            } catch (IOException | InterruptedException e) {
+                showExceptionDialog("Program execution failed", e);
+                e.printStackTrace();
+            }
         }
 
         if (program.getResult() != null) {
@@ -230,6 +222,20 @@ public class RocketTable {
         }
     }
 
+    private void initFileChoosers() {
+        openFileChooser.setInitialDirectory(new File("."));
+        openFileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Supported Files", "*.sas7bdat", "*.sbdf", "*.stdf", "*.csv"),
+                new FileChooser.ExtensionFilter("SAS File (SAS7BDAT)", "*.sas7bdat"),
+                new FileChooser.ExtensionFilter("Spotfire Binary Data File (SBDF)", "*.sbdf"),
+                new FileChooser.ExtensionFilter("Spotfire Text Data File (STDF)", "*.stdf"),
+                new FileChooser.ExtensionFilter("CSV File", "*.csv")
+        );
+
+        exportFileChooser.setTitle("Export table data");
+        exportFileChooser.setInitialDirectory(new File("."));
+        exportFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV file", "*.csv"));
+    }
 
     private void initHotkeys() {
         ObservableMap<KeyCombination, Runnable> accelerators = stage.getScene().getAccelerators();
@@ -407,25 +413,25 @@ public class RocketTable {
             sw.stop();
             recreateTable();
         } catch (Exception e) {
-            showExceptionDialog(e);
+            showExceptionDialog("Can't open file " + file.getName(), e);
             e.printStackTrace();
             tableView.getColumns().clear();
             tableView.getItems().clear();
         }
     }
 
-    private void showExceptionDialog(Exception e) {
+    private void showExceptionDialog(String message, Exception e) {
         StringWriter sw = new StringWriter();
         e.printStackTrace(new PrintWriter(sw));
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText("Can't open file");
-        alert.setContentText(e.getMessage());
+        alert.setHeaderText(message);
+//        alert.setContentText(e.getMessage());
 
-//        TextArea textArea = new TextArea(sw.toString());
-//        textArea.setEditable(false);
-//        alert.getDialogPane().setExpandableContent(textArea);
+        TextArea textArea = new TextArea(sw.toString());
+        textArea.setEditable(false);
+        alert.getDialogPane().setExpandableContent(textArea);
 
         alert.showAndWait();
     }
