@@ -1,12 +1,10 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.programs;
 
 import com.google.gson.Gson;
 import lombok.SneakyThrows;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -32,20 +30,11 @@ public class Programs {
     @SneakyThrows
     public static void exec(Program program) {
         ProcessBuilder processBuilder = new ProcessBuilder()
-                .command(program.exec, program.args)
-                .directory(new File("processors"))
+                .command(program.getCmd().split(" "))
                 .inheritIO();
 
         Process process = processBuilder.start();
         process.waitFor();
     }
 
-    @Value
-    public static class Program {
-        private String name;
-        private String exec;
-        private String args;
-        private boolean input;
-        private boolean result;
-    }
 }

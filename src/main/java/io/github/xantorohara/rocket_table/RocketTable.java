@@ -4,6 +4,8 @@ import io.github.xantorohara.rocket_table.engine.SmartColumns;
 import io.github.xantorohara.rocket_table.engine.SmartRow;
 import io.github.xantorohara.rocket_table.engine.SmartWatch;
 import io.github.xantorohara.rocket_table.engine.TableModel;
+import io.github.xantorohara.rocket_table.programs.Program;
+import io.github.xantorohara.rocket_table.programs.Programs;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableMap;
@@ -218,7 +220,7 @@ public class RocketTable implements Initializable {
 
     private void initPrograms() {
 
-        List<Programs.Program> programs = Programs.loadProcessors();
+        List<Program> programs = Programs.loadProcessors();
 
         programsButton.getItems().setAll(
                 programs.stream().map(program -> {
@@ -231,21 +233,27 @@ public class RocketTable implements Initializable {
         );
     }
 
-    private void runProcessor(Programs.Program program) {
+    private void runProcessor(Program program) {
 
-        final File inputFile = new File("processors/input.csv");
-        final File resultFile = new File("processors/result.csv");
-
-        inputFile.delete();
-        resultFile.delete();
-        if (program.isInput() && tableModel.getColumns() != null) {
-            tableModel.export(inputFile);
+        if (program.getInput() != null) {
+            File inputFile = new File(program.getInput());
+            inputFile.delete();
+            if (tableModel.getColumns() != null) {
+                tableModel.export(inputFile);
+            }
         }
 
-        Programs.exec(program);
+        if (program.getResult() != null) {
+            File resultFile = new File(program.getResult());
+            resultFile.delete();
+        }
 
-        if (program.isResult()) {
-            openFile(resultFile);
+        if (program.getCmd() != null) {
+            Programs.exec(program);
+        }
+
+        if (program.getResult() != null) {
+            openFile(new File(program.getResult()));
         }
     }
 

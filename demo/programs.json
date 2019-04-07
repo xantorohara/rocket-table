@@ -1,14 +1,16 @@
 [
   {
+    "name": "Save as CSV",
+    "input": "data.csv"
+  },
+  {
     "name": "Open in Excel",
-    "exec": "excel",
-    "args": "my-table.csv",
+    "cmd": "cmd /c start excel my-table.csv",
     "input": "my-table.csv"
   },
   {
     "name": "Open in Notepad",
-    "exec": "notepad",
-    "args": "input.csv",
+    "cmd": "notepad input.csv",
     "input": "input.csv"
   }
 ]
