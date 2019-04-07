@@ -9,7 +9,6 @@ import io.github.xantorohara.rocket_table.programs.Programs;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableMap;
-import javafx.fxml.Initializable;
 import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -27,18 +26,17 @@ import javafx.util.converter.DefaultStringConverter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import static javafx.scene.input.KeyCombination.keyCombination;
 
 @Slf4j
-public class RocketTable implements Initializable {
+public class RocketTable {
 
     public Label columnsCountLabel;
     public Label selectedRowsLabel;
@@ -74,9 +72,30 @@ public class RocketTable implements Initializable {
         this.encoding = encoding;
     }
 
-    public void setStage(Stage stage) {
+    public void init(Stage stage) {
+        log.info("Init started");
         this.stage = stage;
+
+        openFileChooser.setInitialDirectory(new File("."));
+        openFileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Supported Files", "*.sas7bdat", "*.sbdf", "*.stdf", "*.csv"),
+                new FileChooser.ExtensionFilter("SAS File (SAS7BDAT)", "*.sas7bdat"),
+                new FileChooser.ExtensionFilter("Spotfire Binary Data File (SBDF)", "*.sbdf"),
+                new FileChooser.ExtensionFilter("Spotfire Text Data File (STDF)", "*.stdf"),
+                new FileChooser.ExtensionFilter("CSV File", "*.csv")
+        );
+
+        exportFileChooser.setTitle("Export table data");
+        exportFileChooser.setInitialDirectory(new File("."));
+        exportFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV file", "*.csv"));
+
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         initHotkeys();
+        initActions();
+        initBindings();
+        initPrograms();
+        log.info("Init finished");
     }
 
     public void showAbout() {
@@ -85,7 +104,7 @@ public class RocketTable implements Initializable {
         dialog.initStyle(StageStyle.UTILITY);
         dialog.setHeaderText("Rocket Table is a lightweight viewer for " +
                 "SAS (.*sas7bdat), Spotfire (.sbdf, * stdf) and CSV files.\n" +
-                "© Xantorohara, 2015-2018"
+                "© Xantorohara, 2015-2019"
         );
         dialog.setContentText("xxx");
         dialog.setGraphic(new ImageView(new Image("icon.png")));
@@ -163,44 +182,31 @@ public class RocketTable implements Initializable {
         }
     }
 
-    public void initialize(URL location, ResourceBundle resources) {
-
-        openFileChooser.setInitialDirectory(new File("."));
-        openFileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Supported Files", "*.sas7bdat", "*.sbdf", "*.stdf", "*.csv"),
-                new FileChooser.ExtensionFilter("SAS File (SAS7BDAT)", "*.sas7bdat"),
-                new FileChooser.ExtensionFilter("Spotfire Binary Data File (SBDF)", "*.sbdf"),
-                new FileChooser.ExtensionFilter("Spotfire Text Data File (STDF)", "*.stdf"),
-                new FileChooser.ExtensionFilter("CSV File", "*.csv")
-        );
-
-        exportFileChooser.setTitle("Export table data");
-        exportFileChooser.setInitialDirectory(new File("."));
-        exportFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV file", "*.csv"));
-
-        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        initActions();
-        initBindings();
-        initPrograms();
-    }
-
     private void initPrograms() {
 
-        List<Program> programs = Programs.loadProcessors();
+
+        List<Program> programs;
+        try {
+            programs = Programs.loadPrograms();
+        } catch (IOException e) {
+            showExceptionDialog(e);
+            return;
+        }
 
         programsButton.getItems().setAll(
                 programs.stream().map(program -> {
                     MenuItem menuItem = new MenuItem(program.getName());
                     menuItem.setOnAction(event -> {
-                        runProcessor(program);
+                        runProgram(program);
                     });
                     return menuItem;
                 }).collect(Collectors.toList())
         );
+
+        programsButton.setDisable(false);
     }
 
-    private void runProcessor(Program program) {
+    private void runProgram(Program program) {
 
         if (program.getInput() != null) {
             File inputFile = new File(program.getInput());

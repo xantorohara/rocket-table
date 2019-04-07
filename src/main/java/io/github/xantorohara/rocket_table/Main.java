@@ -30,7 +30,7 @@ public class Main extends Application {
         RocketTable controller = loader.getController();
 
         stage.setScene(new Scene(root, 960, 540));
-        controller.setStage(stage);
+        controller.init(stage);
         stage.show();
 
         List<String> args = getParameters().getUnnamed();

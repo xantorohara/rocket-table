@@ -25,7 +25,7 @@
 
             <Separator/>
 
-            <MenuButton fx:id="programsButton" text="Programs"/>
+            <MenuButton fx:id="programsButton" text="Programs" disable="true"/>
 
             <Separator/>
 
