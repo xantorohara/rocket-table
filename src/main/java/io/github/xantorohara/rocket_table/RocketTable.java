@@ -9,7 +9,6 @@ import io.github.xantorohara.rocket_table.programs.Programs;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableMap;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
 import javafx.scene.control.*;
@@ -41,46 +40,24 @@ import static javafx.scene.input.KeyCombination.keyCombination;
 @Slf4j
 public class RocketTable implements Initializable {
 
-    public static final String VERSION = "Rocket Table v1.1.1";
-
-    @FXML
     public Label columnsCountLabel;
-
-    @FXML
     public Label selectedRowsLabel;
-    @FXML
     public Label uniqueRowsLabel;
-    @FXML
     public Label matchedRowsLabel;
-    @FXML
     public Label totalRowsLabel;
-    @FXML
+
     public Button openFileButton;
-    @FXML
     public Button columnsSetButton;
-
-    @FXML
     public MenuButton programsButton;
-
-    @FXML
     public Button exportButton;
-    @FXML
     public TextField searchTextField;
-    @FXML
     public TextField columnsTextField;
-    @FXML
     public MenuItem truncateViewButton;
-    @FXML
     public MenuItem truncateSelectionButton;
-    @FXML
     public MenuButton truncateButton;
-    @FXML
     public CheckBox filterCheckbox;
-    @FXML
     public CheckBox uniqueCheckbox;
-    @FXML
     public TableView<SmartRow> tableView;
-    @FXML
     public ContextMenu columnsAutocompleteContextMenu;
 
     private FileChooser openFileChooser = new FileChooser();
@@ -102,7 +79,6 @@ public class RocketTable implements Initializable {
         initHotkeys();
     }
 
-    @FXML
     public void showAbout() {
         Alert dialog = new Alert(Alert.AlertType.INFORMATION);
         dialog.setTitle("About Rocket Table");
@@ -123,7 +99,6 @@ public class RocketTable implements Initializable {
         dialog.showAndWait();
     }
 
-    @FXML
     public void truncateView() {
         tableModel.truncate();
 
@@ -135,7 +110,6 @@ public class RocketTable implements Initializable {
         repaintTable();
     }
 
-    @FXML
     public void truncateSelection() {
         tableModel.truncate(tableView.getSelectionModel().getSelectedItems());
 
@@ -147,7 +121,6 @@ public class RocketTable implements Initializable {
         repaintTable();
     }
 
-    @FXML
     public void openFile() {
         File file = openFileChooser.showOpenDialog(stage);
         if (file != null) {
@@ -155,7 +128,6 @@ public class RocketTable implements Initializable {
         }
     }
 
-    @FXML
     public void exportData() {
         File file = exportFileChooser.showSaveDialog(exportButton.getScene().getWindow());
         if (file != null) {
@@ -163,33 +135,28 @@ public class RocketTable implements Initializable {
         }
     }
 
-    @FXML
     public void setColumns() {
         if (tableModel.setColumns(columnsTextField.getText())) {
             recreateTable();
         }
     }
 
-    @FXML
     public void filterRows() {
         tableModel.setFilterRows(filterCheckbox.isSelected());
         recreateTable();
     }
 
-    @FXML
     public void uniqueRows() {
         tableModel.setUniqueRows(uniqueCheckbox.isSelected());
         recreateTable();
     }
 
-    @FXML
     public void searchTextFieldAutocomplete(KeyEvent e) {
         if (e.isControlDown() && e.getCode() == KeyCode.SPACE) {
             columnsAutocomplete(searchTextField);
         }
     }
 
-    @FXML
     public void columnsTextFieldAutocomplete(KeyEvent e) {
         if (e.isControlDown() && e.getCode() == KeyCode.SPACE) {
             columnsAutocomplete(columnsTextField);
