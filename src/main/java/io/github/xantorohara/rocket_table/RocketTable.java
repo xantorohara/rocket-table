@@ -94,8 +94,7 @@ public class RocketTable {
                 "SAS (.*sas7bdat), Spotfire (.sbdf, * stdf) and CSV files.\n" +
                 "© Xantorohara, 2015-2019"
         );
-        dialog.setContentText("xxx");
-        dialog.setGraphic(new ImageView(new Image("icon.png")));
+        dialog.setGraphic(new ImageView((new Image(getClass().getResourceAsStream("icon.png")))));
 
         WebView webView = new WebView();
         webView.setPrefWidth(500);
