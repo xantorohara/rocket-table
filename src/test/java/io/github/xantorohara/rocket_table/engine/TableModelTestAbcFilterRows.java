@@ -1,8 +1,6 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
 import org.junit.Test;
-
-import java.io.IOException;
 
 /**
  * Check matching, filtering and distincts
@@ -10,7 +8,7 @@ import java.io.IOException;
 public class TableModelTestAbcFilterRows extends TableModelTestAbc {
 
     @Test
-    public void testFilterRows() throws IOException {
+    public void testFilterRows() {
         model.search("*");
         assertModelData(model, CSV_DATA);
         assertMatchedRows(model, ALL_MATCHED);

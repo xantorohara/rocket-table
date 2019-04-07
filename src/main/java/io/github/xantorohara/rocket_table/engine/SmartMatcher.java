@@ -1,4 +1,4 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
 import java.util.*;
 import java.util.regex.Matcher;

@@ -1,6 +1,8 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
 import io.github.xantorohara.rocket_table.readers.*;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,30 +10,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Logger;
 
+@Data
+@Slf4j
 public class TableResource {
-    private static final Logger log = Logger.getLogger("rocket_table");
 
     private SmartColumns columns;
 
     private List<SmartRow> data;
-
-    public List<SmartRow> getData() {
-        return data;
-    }
-
-    public void setData(List<SmartRow> data) {
-        this.data = data;
-    }
-
-    public SmartColumns getColumns() {
-        return columns;
-    }
-
-    public void setColumns(SmartColumns columns) {
-        this.columns = columns;
-    }
 
     private String[] convert(Object[] row) {
         String[] out = row instanceof String[] ? (String[]) row : new String[row.length];
@@ -95,6 +81,6 @@ public class TableResource {
             );
         }
 
-        log.info("Loaded records: " + data.size());
+        log.info("Loaded [{}] records", data.size());
     }
 }

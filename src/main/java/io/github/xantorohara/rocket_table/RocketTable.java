@@ -1,10 +1,14 @@
 package io.github.xantorohara.rocket_table;
 
+import io.github.xantorohara.rocket_table.engine.SmartColumns;
+import io.github.xantorohara.rocket_table.engine.SmartRow;
+import io.github.xantorohara.rocket_table.engine.SmartWatch;
+import io.github.xantorohara.rocket_table.engine.TableModel;
+import io.github.xantorohara.rocket_table.programs.Program;
+import io.github.xantorohara.rocket_table.programs.Programs;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableMap;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -19,58 +23,39 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.converter.DefaultStringConverter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
-import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import static javafx.scene.input.KeyCombination.keyCombination;
 
-public class RocketTable implements Initializable {
-    private static final Logger log = Logger.getLogger("rocket_table");
+@Slf4j
+public class RocketTable {
 
-    public static final String VERSION = "Rocket Table v1.0.12";
-
-    @FXML
     public Label columnsCountLabel;
-
-    @FXML
     public Label selectedRowsLabel;
-    @FXML
     public Label uniqueRowsLabel;
-    @FXML
     public Label matchedRowsLabel;
-    @FXML
     public Label totalRowsLabel;
-    @FXML
+
     public Button openFileButton;
-    @FXML
     public Button columnsSetButton;
-    @FXML
+    public MenuButton programsButton;
     public Button exportButton;
-    @FXML
     public TextField searchTextField;
-    @FXML
     public TextField columnsTextField;
-    @FXML
     public MenuItem truncateViewButton;
-    @FXML
     public MenuItem truncateSelectionButton;
-    @FXML
     public MenuButton truncateButton;
-    @FXML
     public CheckBox filterCheckbox;
-    @FXML
     public CheckBox uniqueCheckbox;
-    @FXML
     public TableView<SmartRow> tableView;
-    @FXML
     public ContextMenu columnsAutocompleteContextMenu;
 
     private FileChooser openFileChooser = new FileChooser();
@@ -87,33 +72,39 @@ public class RocketTable implements Initializable {
         this.encoding = encoding;
     }
 
-    public void setStage(Stage stage) {
+    public void init(Stage stage) {
+        log.info("Init started");
         this.stage = stage;
+
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        initFileChoosers();
         initHotkeys();
+        initActions();
+        initBindings();
+        initPrograms();
+        log.info("Init finished");
     }
 
-    @FXML
-    public void showAbout() throws IOException {
+    public void showAbout() {
         Alert dialog = new Alert(Alert.AlertType.INFORMATION);
         dialog.setTitle("About Rocket Table");
         dialog.initStyle(StageStyle.UTILITY);
-        dialog.setHeaderText("Rocket Table is a lightweight viewer for " +
+        dialog.setHeaderText("\"Rocket table\" is a lightweight viewer for " +
                 "SAS (.*sas7bdat), Spotfire (.sbdf, * stdf) and CSV files.\n" +
-                "© Xantorohara, 2015-2018"
+                "© Xantorohara, 2015-2019"
         );
-        dialog.setContentText("xxx");
-        dialog.setGraphic(new ImageView(new Image("icon.png")));
+        dialog.setGraphic(new ImageView((new Image(getClass().getResourceAsStream("icon.png")))));
 
         WebView webView = new WebView();
         webView.setPrefWidth(500);
         webView.setPrefHeight(300);
         WebEngine engine = webView.getEngine();
-        engine.load(getClass().getClassLoader().getResource("about.html").toExternalForm());
+        engine.load(getClass().getResource("about.html").toExternalForm());
         dialog.getDialogPane().setContent(webView);
         dialog.showAndWait();
     }
 
-    @FXML
     public void truncateView() {
         tableModel.truncate();
 
@@ -125,7 +116,6 @@ public class RocketTable implements Initializable {
         repaintTable();
     }
 
-    @FXML
     public void truncateSelection() {
         tableModel.truncate(tableView.getSelectionModel().getSelectedItems());
 
@@ -137,7 +127,6 @@ public class RocketTable implements Initializable {
         repaintTable();
     }
 
-    @FXML
     public void openFile() {
         File file = openFileChooser.showOpenDialog(stage);
         if (file != null) {
@@ -145,7 +134,6 @@ public class RocketTable implements Initializable {
         }
     }
 
-    @FXML
     public void exportData() {
         File file = exportFileChooser.showSaveDialog(exportButton.getScene().getWindow());
         if (file != null) {
@@ -153,41 +141,87 @@ public class RocketTable implements Initializable {
         }
     }
 
-    @FXML
     public void setColumns() {
         if (tableModel.setColumns(columnsTextField.getText())) {
             recreateTable();
         }
     }
 
-    @FXML
     public void filterRows() {
         tableModel.setFilterRows(filterCheckbox.isSelected());
         recreateTable();
     }
 
-    @FXML
     public void uniqueRows() {
         tableModel.setUniqueRows(uniqueCheckbox.isSelected());
         recreateTable();
     }
 
-    @FXML
     public void searchTextFieldAutocomplete(KeyEvent e) {
         if (e.isControlDown() && e.getCode() == KeyCode.SPACE) {
             columnsAutocomplete(searchTextField);
         }
     }
 
-    @FXML
     public void columnsTextFieldAutocomplete(KeyEvent e) {
         if (e.isControlDown() && e.getCode() == KeyCode.SPACE) {
             columnsAutocomplete(columnsTextField);
         }
     }
 
-    public void initialize(URL location, ResourceBundle resources) {
+    private void initPrograms() {
 
+        List<Program> programs;
+        try {
+            programs = Programs.loadPrograms();
+        } catch (IOException e) {
+            showExceptionDialog("Can't load programs", e);
+            return;
+        }
+
+        programsButton.getItems().setAll(
+                programs.stream().map(program -> {
+                    MenuItem menuItem = new MenuItem(program.getName());
+                    menuItem.setOnAction(event -> {
+                        runProgram(program);
+                    });
+                    return menuItem;
+                }).collect(Collectors.toList())
+        );
+
+        programsButton.setDisable(false);
+    }
+
+    private void runProgram(Program program) {
+
+        if (program.getInput() != null) {
+            File inputFile = new File(program.getInput());
+            inputFile.delete();
+            if (tableModel.getColumns() != null) {
+                tableModel.export(inputFile);
+            }
+        }
+
+        if (program.getResult() != null) {
+            File resultFile = new File(program.getResult());
+            resultFile.delete();
+        }
+
+        if (program.getCmd() != null) {
+            try {
+                Programs.exec(program);
+            } catch (IOException | InterruptedException e) {
+                showExceptionDialog("Program execution failed", e);
+                e.printStackTrace();
+            }
+        }
+
+        if (program.getResult() != null) {
+            openFile(new File(program.getResult()));
+        }
+    }
+
+    private void initFileChoosers() {
         openFileChooser.setInitialDirectory(new File("."));
         openFileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("All Supported Files", "*.sas7bdat", "*.sbdf", "*.stdf", "*.csv"),
@@ -200,11 +234,6 @@ public class RocketTable implements Initializable {
         exportFileChooser.setTitle("Export table data");
         exportFileChooser.setInitialDirectory(new File("."));
         exportFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV file", "*.csv"));
-
-        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        initActions();
-        initBindings();
     }
 
     private void initHotkeys() {
@@ -369,7 +398,7 @@ public class RocketTable implements Initializable {
     }
 
     public void openFile(File file) {
-        stage.setTitle(file.getName() + " - " + VERSION);
+        stage.setTitle(file.getName() + " - " + Const.VERSION);
 
         internalChange = true;
         searchTextField.clear();
@@ -383,25 +412,25 @@ public class RocketTable implements Initializable {
             sw.stop();
             recreateTable();
         } catch (Exception e) {
-            showExceptionDialog(e);
+            showExceptionDialog("Can't open file " + file.getName(), e);
             e.printStackTrace();
             tableView.getColumns().clear();
             tableView.getItems().clear();
         }
     }
 
-    private void showExceptionDialog(Exception e) {
+    private void showExceptionDialog(String message, Exception e) {
         StringWriter sw = new StringWriter();
         e.printStackTrace(new PrintWriter(sw));
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText("Can't open file");
-        alert.setContentText(e.getMessage());
+        alert.setHeaderText(message);
+//        alert.setContentText(e.getMessage());
 
-//        TextArea textArea = new TextArea(sw.toString());
-//        textArea.setEditable(false);
-//        alert.getDialogPane().setExpandableContent(textArea);
+        TextArea textArea = new TextArea(sw.toString());
+        textArea.setEditable(false);
+        alert.getDialogPane().setExpandableContent(textArea);
 
         alert.showAndWait();
     }

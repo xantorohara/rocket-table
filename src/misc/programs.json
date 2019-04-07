@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Save as CSV",
+    "input": "table.csv"
+  },
+  {
+    "name": "Open in Excel",
+    "cmd": "cmd /c start excel my-table.csv",
+    "input": "table.csv"
+  },
+  {
+    "name": "Open in Notepad",
+    "cmd": "notepad input.csv",
+    "input": "input.csv"
+  },
+  {
+    "name": "Execute command",
+    "cmd": "cmd /c echo out message && echo err message 1>&2"
+  }
+]

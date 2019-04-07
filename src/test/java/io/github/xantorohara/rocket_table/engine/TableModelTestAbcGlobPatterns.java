@@ -1,8 +1,6 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
 import org.junit.Test;
-
-import java.io.IOException;
 
 /**
  * Test matching
@@ -10,7 +8,7 @@ import java.io.IOException;
 public class TableModelTestAbcGlobPatterns extends TableModelTestAbc {
 
     @Test
-    public void testMatchNumbers() throws IOException {
+    public void testMatchNumbers() {
         model.search("1");
         assertMatchedRows(model, 400);
 
@@ -28,7 +26,7 @@ public class TableModelTestAbcGlobPatterns extends TableModelTestAbc {
     }
 
     @Test
-    public void testMatch1Letter() throws IOException {
+    public void testMatch1Letter() {
         model.search(" ");
         assertMatchedRows(model);
 
@@ -86,7 +84,7 @@ public class TableModelTestAbcGlobPatterns extends TableModelTestAbc {
     }
 
     @Test
-    public void testMatch2Letters() throws IOException {
+    public void testMatch2Letters() {
         model.search("  ");
         assertMatchedRows(model);
 

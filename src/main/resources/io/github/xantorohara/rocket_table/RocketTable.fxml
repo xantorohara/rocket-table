@@ -3,7 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="RocketTable.css"
+<BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@RocketTable.css"
             fx:controller="io.github.xantorohara.rocket_table.RocketTable">
 
     <fx:define>
@@ -13,7 +13,7 @@
     <top>
         <ToolBar>
 
-            <Button fx:id="openFileButton" text="Open file" onAction="#openFile"/>
+            <Button fx:id="openFileButton" text="Open" onAction="#openFile"/>
             <Separator/>
             <Label text="Search: "/>
             <TextField fx:id="searchTextField" HBox.hgrow="ALWAYS"
@@ -22,6 +22,10 @@
 
             <CheckBox fx:id="filterCheckbox" text="Filter" onAction="#filterRows"/>
             <CheckBox fx:id="uniqueCheckbox" text="Unique" onAction="#uniqueRows"/>
+
+            <Separator/>
+
+            <MenuButton fx:id="programsButton" text="Programs" disable="true"/>
 
             <Separator/>
 

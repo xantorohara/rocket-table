@@ -1,21 +1,25 @@
-# Rocket Table
+# Rocket table
 
 ## About
-Rocket Table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and CSV formats.
+Rocket table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and CSV formats.
 
-![Rocket Table screenshot](https://xantorohara.github.io/rocket-table/screenshot.png)
+![Application screenshot](https://xantorohara.github.io/rocket-table/screenshot.png)
 
 ## Download
-[rocket-table-1.0.12.zip](https://xantorohara.github.io/rocket-table/rocket-table-1.0.12.zip)
+[rocket-table-1.1.1.zip](https://xantorohara.github.io/rocket-table/rocket-table-1.1.1.zip)
+
+Previous versions are available as well at the 
+[project repository](https://github.com/xantorohara/rocket-table/tree/master/docs)
 
 ## Changelog
+* 2019.03.07 v1.1.1 - Upgraded to Parso v2.0.11, added "Programs" support
 * 2018.07.14 v1.0.12 - Published sources
 * 2018.06.08 v1.0.11 - Changed license to Apache License v2.0
-* 2018.06.05 v1.0.10 - Updated to Parso v2.0.9
+* 2018.06.05 v1.0.10 - Upgraded to Parso v2.0.9
 * 2017.04.05 v1.0.9  - Added encoding command line parameter
 * 2017.03.19 v1.0.7  - Added support for STDF (Spotfire Text Data File) format
 * 2017.03.09 v1.0.6  - Added support for SBDF (Spotfire Binary Data File) format
-* 2016.04.10 v1.0.5  - Updated to Parso v1.2.1
+* 2016.04.10 v1.0.5  - Upgraded to Parso v1.2.1
 * ...
 * 2015.01.10 v1.0.1  -  Initial version
 
@@ -101,7 +105,7 @@ Just execute this script from the directory where the rocket-table.jar is locate
 * **--encoding=EncodingName** - specify encoding for input files. E.g.: --encoding=Cp1250
 
 ## Libraries used
-- Parso v2.0.9
+- Parso v2.0.11
 - SBDF v6.5.0
 
 
@@ -109,7 +113,7 @@ Just execute this script from the directory where the rocket-table.jar is locate
 For questions, feature requests or technical support related to this application you can contact
 [xantorohara@gmail.com](mailto:xantorohara@gmail.com)
 
-## Build
+## Build from sources
 
 1. Clone or download [Rocket Table repository](https://github.com/xantorohara/rocket-table)
 2. Build it using maven:
@@ -118,6 +122,6 @@ mvn clean package
 ```
 
 ## License
-Rocket Table by Xantorohara are licensed under Apache License v2.0.
+Rocket Table by Xantorohara is licensed under Apache License v2.0.
 
-Version 1.0.12, published 2015-01-10, updated 2018-07-14
+&copy;Xantorohara, 2015-2019

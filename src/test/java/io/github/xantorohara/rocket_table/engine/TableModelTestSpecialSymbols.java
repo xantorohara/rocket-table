@@ -1,4 +1,4 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Check match of special symbols
  */
 public class TableModelTestSpecialSymbols extends TableModelTest {
+
+    private static final int[] ALL_MATCHED = new int[]{700, 701, 702, 703, 704, 705, 706, 707};
 
     @Before
     public void init() throws IOException {
@@ -36,8 +38,6 @@ public class TableModelTestSpecialSymbols extends TableModelTest {
         );
     }
 
-    private static final int[] ALL_MATCHED = new int[]{700, 701, 702, 703, 704, 705, 706, 707};
-
     @Test
     public void test() {
         assertThat(model.getColumns().getNames()).containsExactly("A", "B", "C");
@@ -46,7 +46,7 @@ public class TableModelTestSpecialSymbols extends TableModelTest {
     }
 
     @Test
-    public void whenGiven1SymbolThenMatchRows() throws IOException {
+    public void whenGiven1SymbolThenMatchRows() {
         model.search("*");
         assertModelData(model, allData());
         assertMatchedRows(model, ALL_MATCHED);
@@ -65,7 +65,7 @@ public class TableModelTestSpecialSymbols extends TableModelTest {
     }
 
     @Test
-    public void whenGiven2SymbolThenMatchRows() throws IOException {
+    public void whenGiven2SymbolThenMatchRows() {
         model.search("**");
         assertModelData(model, allData());
         assertMatchedRows(model, ALL_MATCHED);
@@ -84,7 +84,7 @@ public class TableModelTestSpecialSymbols extends TableModelTest {
     }
 
     @Test
-    public void whenGiven3SymbolThenMatchRows() throws IOException {
+    public void whenGiven3SymbolThenMatchRows() {
         model.search("***");
         assertModelData(model, allData());
         assertMatchedRows(model, ALL_MATCHED);

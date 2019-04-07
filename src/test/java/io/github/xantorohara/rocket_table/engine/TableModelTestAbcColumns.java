@@ -1,8 +1,6 @@
-package io.github.xantorohara.rocket_table;
+package io.github.xantorohara.rocket_table.engine;
 
 import org.junit.Test;
-
-import java.io.IOException;
 
 /**
  * Check search string with "column=value, " specification
@@ -10,14 +8,14 @@ import java.io.IOException;
 public class TableModelTestAbcColumns extends TableModelTestAbc {
 
     @Test
-    public void test1() throws IOException {
+    public void test1() {
         model.search("=*");
         assertModelData(model, CSV_DATA);
         assertMatchedRows(model);
     }
 
     @Test
-    public void test2() throws IOException {
+    public void test2() {
         model.search("X=a");
         assertModelData(model, CSV_DATA);
         assertMatchedRows(model);
@@ -28,7 +26,7 @@ public class TableModelTestAbcColumns extends TableModelTestAbc {
     }
 
     @Test
-    public void test3() throws IOException {
+    public void test3() {
         model.search("A=a, B=b");
         assertModelData(model, CSV_DATA);
         assertMatchedRows(model, 602, 603, 604);
@@ -39,7 +37,7 @@ public class TableModelTestAbcColumns extends TableModelTestAbc {
     }
 
     @Test
-    public void test4() throws IOException {
+    public void test4() {
         model.search("A=a, A=b");
         assertModelData(model, CSV_DATA);
         assertMatchedRows(model, 402, 403, 404, 405, 410, 411);
