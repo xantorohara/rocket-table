@@ -6,12 +6,13 @@ Rocket table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and
 ![Application screenshot](https://xantorohara.github.io/rocket-table/screenshot.png)
 
 ## Download
-[rocket-table-1.1.1.zip](https://xantorohara.github.io/rocket-table/rocket-table-1.1.1.zip)
+[rocket-table-1.1.2.zip](https://xantorohara.github.io/rocket-table/rocket-table-1.1.2.zip)
 
 Previous versions are available as well at the 
 [project repository](https://github.com/xantorohara/rocket-table/tree/master/docs)
 
 ## Changelog
+* 2019.03.08 v1.1.2 - Local and shared "Programs" configs
 * 2019.03.07 v1.1.1 - Upgraded to Parso v2.0.11, added "Programs" support
 * 2018.07.14 v1.0.12 - Published sources
 * 2018.06.08 v1.0.11 - Changed license to Apache License v2.0
