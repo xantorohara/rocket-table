@@ -179,17 +179,18 @@ public class RocketTable {
             return;
         }
 
-        programsButton.getItems().setAll(
-                programs.stream().map(program -> {
-                    MenuItem menuItem = new MenuItem(program.getName());
-                    menuItem.setOnAction(event -> {
-                        runProgram(program);
-                    });
-                    return menuItem;
-                }).collect(Collectors.toList())
-        );
-
-        programsButton.setDisable(false);
+        if (!programs.isEmpty()) {
+            programsButton.getItems().setAll(
+                    programs.stream().map(program -> {
+                        MenuItem menuItem = new MenuItem(program.getName());
+                        menuItem.setOnAction(event -> {
+                            runProgram(program);
+                        });
+                        return menuItem;
+                    }).collect(Collectors.toList())
+            );
+            programsButton.setDisable(false);
+        }
     }
 
     private void runProgram(Program program) {
