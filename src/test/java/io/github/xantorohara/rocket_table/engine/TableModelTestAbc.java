@@ -53,7 +53,7 @@ public abstract class TableModelTestAbc extends TableModelTest {
     public void init() throws IOException {
         model = new TableModel();
         File f = new File("src/test/resources/abc.csv");
-        model.load(f);
+        model.load(f, null, null);
     }
 
     @Test

@@ -16,13 +16,13 @@
             <source>src/main/resources/io/github/xantorohara/rocket_table/icon.png</source>
         </file>
         <file>
-            <source>src/misc/programs.json</source>
-        </file>
-        <file>
             <source>src/misc/rocket-table-associate-files.cmd</source>
         </file>
         <file>
             <source>src/misc/rocket-table-console.cmd</source>
+        </file>
+        <file>
+            <source>src/misc/rocket-table-sas-format.cmd</source>
         </file>
         <file>
             <source>LICENSE</source>

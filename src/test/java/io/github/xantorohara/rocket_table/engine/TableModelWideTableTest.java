@@ -32,7 +32,7 @@ public class TableModelWideTableTest {
     public void init() throws IOException {
         tableModel = new TableModel();
         File f = new File("src/test/resources/c99.csv");
-        tableModel.load(f);
+        tableModel.load(f, null, null);
     }
 
     @Test

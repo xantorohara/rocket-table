@@ -103,14 +103,19 @@ Just execute this script from the directory where the rocket-table.jar is locate
 ```
 
 ## Command line parameters
+
 * **--encoding=EncodingName** - specify encoding for input files. E.g.: --encoding=Cp1250
+* **--sas-date-format-type=FORMAT_TYPE** - specify date format for input files.  
+  E.g.:
+  --sas-date-format-type=JAVA_DATE (default) | SAS_FORMAT | SAS_VALUE | EPOCH_SECONDS | EPOCH_MILLIS
 
 ## Libraries used
-- Parso v2.0.11
+
+- Parso v2.0.14
 - SBDF v6.5.0
 
-
 ## Contacts
+
 For questions, feature requests or technical support related to this application you can contact
 [xantorohara@gmail.com](mailto:xantorohara@gmail.com)
 
@@ -123,6 +128,7 @@ mvn clean package
 ```
 
 ## License
+
 Rocket Table by Xantorohara is licensed under Apache License v2.0.
 
-&copy;Xantorohara, 2015-2019
+&copy;Xantorohara, 2015-2021

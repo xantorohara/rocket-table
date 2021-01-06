@@ -11,8 +11,8 @@ import java.util.function.Consumer;
 
 public class SbdfReader implements Reader {
     @Override
-    public void read(File file, String encoding,
-                     Consumer<String[]> columnsConsumer, Consumer<Object[]> rowsConsumer) throws IOException {
+    public void read(File file, Consumer<String[]> columnsConsumer,
+                     Consumer<Object[]> rowsConsumer) throws IOException {
         try (InputStream is = new FileInputStream(file)) {
             BinaryReader reader = new BinaryReader(is);
             FileHeader.read(reader);
