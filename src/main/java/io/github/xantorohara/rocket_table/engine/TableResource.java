@@ -77,10 +77,15 @@ public class TableResource {
             AtomicInteger i = new AtomicInteger();
             reader.read(file,
                     cols -> columns = new SmartColumns(cols),
-                    row -> data.add(new SmartRow(i.getAndIncrement(), convert(row)))
+                    row -> {
+                        data.add(new SmartRow(i.getAndIncrement(), convert(row)));
+                        if (i.get() % 100000 == 0) {
+                            log.debug("Loaded [{}] rows", i.get());
+                        }
+                    }
             );
         }
 
-        log.info("Loaded [{}] records", data.size());
+        log.info("Finally loaded [{}] records", data.size());
     }
 }

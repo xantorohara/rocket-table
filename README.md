@@ -12,17 +12,19 @@ Previous versions are available as well at the
 [project repository](https://github.com/xantorohara/rocket-table/tree/master/docs)
 
 ## Changelog
+* 2021.01.10 v1.1.3 - Removed "Programs" support as it was confusing everyone. Added command line parameter to specify
+  type of SAS date interpretation.
 * 2019.03.08 v1.1.2 - Local and shared "Programs" configs
 * 2019.03.07 v1.1.1 - Upgraded to Parso v2.0.11, added "Programs" support
 * 2018.07.14 v1.0.12 - Published sources
 * 2018.06.08 v1.0.11 - Changed license to Apache License v2.0
 * 2018.06.05 v1.0.10 - Upgraded to Parso v2.0.9
-* 2017.04.05 v1.0.9  - Added encoding command line parameter
-* 2017.03.19 v1.0.7  - Added support for STDF (Spotfire Text Data File) format
-* 2017.03.09 v1.0.6  - Added support for SBDF (Spotfire Binary Data File) format
-* 2016.04.10 v1.0.5  - Upgraded to Parso v1.2.1
+* 2017.04.05 v1.0.9 - Added encoding command line parameter
+* 2017.03.19 v1.0.7 - Added support for STDF (Spotfire Text Data File) format
+* 2017.03.09 v1.0.6 - Added support for SBDF (Spotfire Binary Data File) format
+* 2016.04.10 v1.0.5 - Upgraded to Parso v1.2.1
 * ...
-* 2015.01.10 v1.0.1  -  Initial version
+* 2015.01.10 v1.0.1 - Initial version
 
 ## Features
 * Open files in SAS7BDAT, SBDF and CSV formats
