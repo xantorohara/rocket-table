@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <title>Rocket Table</title>
+    <meta name="description" content="Free SAS viewer">
+    <meta name="keywords" content="SAS, SAS7BDAT, Viewer">
+    <meta name="author" content="Xantorohara">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -63,11 +67,12 @@
 <p>Rocket table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and CSV formats.</p>
 <p><img alt="Application screenshot" src="https://xantorohara.github.io/rocket-table/screenshot.png"/></p>
 <h2>Download</h2>
-<p><a href="https://xantorohara.github.io/rocket-table/rocket-table-1.1.2.zip">rocket-table-1.1.2.zip</a></p>
+<p><a href="https://xantorohara.github.io/rocket-table/rocket-table-1.1.3-beta.zip">rocket-table-1.1.3-beta.zip</a></p>
 <p>Previous versions are available as well at the
     <a href="https://github.com/xantorohara/rocket-table/tree/master/docs">project repository</a></p>
 <h2>Changelog</h2>
 <ul>
+    <li>2021.02.11 v1.1.3-beta - Added date format option</li>
     <li>2019.03.08 v1.1.2 - Local and shared "Programs" configs</li>
     <li>2019.03.07 v1.1.1 - Upgraded to Parso v2.0.11, added "Programs" support</li>
     <li>2018.07.14 v1.0.12 - Published sources</li>
@@ -94,7 +99,7 @@
     <li>Count total, matched, selected and unique rows</li>
     <li>Cross-platform (Windows, Linux, Mac OS X)</li>
     <li>Minimalistic flat design</li>
-    <li>Small application size (around 100KB)</li>
+    <li>Small application size</li>
 </ul>
 <h2>Hotkeys</h2>
 <ul>
@@ -198,11 +203,12 @@
     <li>
         <strong>--sas-date-format-type=FORMAT_TYPE</strong> - specify date format for input files.
         E.g.:
-        --sas-date-format-type=JAVA_DATE (default)
-        --sas-date-format-type=SAS_FORMAT
-        --sas-date-format-type=SAS_VALUE
-        --sas-date-format-type=EPOCH_SECONDS
-        --sas-date-format-type=EPOCH_MILLIS
+        <ul>
+            <li>--sas-date-format-type=JAVA_DATE_LEGACY (default)</li>
+            <li>--sas-date-format-type=SAS_FORMAT_TRIM_EXPERIMENTAL</li>
+            <li>--sas-date-format-type=SAS_VALUE</li>
+            <li>--sas-date-format-type=EPOCH_SECONDS</li>
+        </ul>
     </li>
 </ul>
 <h2>Libraries used</h2>
