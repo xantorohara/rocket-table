@@ -25,10 +25,6 @@
 
             <Separator/>
 
-            <MenuButton fx:id="programsButton" text="Programs" disable="true"/>
-
-            <Separator/>
-
             <Label text="Columns: "/>
             <TextField fx:id="columnsTextField" HBox.hgrow="ALWAYS"
                        onAction="#setColumns" onKeyPressed="#columnsTextFieldAutocomplete"

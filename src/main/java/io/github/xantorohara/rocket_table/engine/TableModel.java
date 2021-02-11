@@ -54,14 +54,10 @@ public class TableModel {
         updateTableData();
     }
 
-    public void load(File file) throws IOException {
-        load(file, "ASCII");
-    }
-
-    public void load(File file, String encoding) throws IOException {
+    public void load(File file, String encoding, String sasDateFormatType) throws IOException {
         log.info("Load [{}]", file);
         tableResource = new TableResource();
-        tableResource.read(file, encoding);
+        tableResource.read(file, encoding, sasDateFormatType);
         reset();
     }
 

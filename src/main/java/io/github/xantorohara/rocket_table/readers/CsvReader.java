@@ -9,8 +9,8 @@ import java.util.function.Consumer;
 
 public class CsvReader implements Reader {
     @Override
-    public void read(File file, String encoding,
-                     Consumer<String[]> columnsConsumer, Consumer<Object[]> rowsConsumer) throws IOException {
+    public void read(File file, Consumer<String[]> columnsConsumer,
+                     Consumer<Object[]> rowsConsumer) throws IOException {
 
         try (FileReader fr = new FileReader(file)) {
             CSVReader reader = new CSVReader(fr);

@@ -56,7 +56,7 @@ public class TableResource {
         return out;
     }
 
-    public void read(File file, String encoding) throws IOException {
+    public void read(File file, String encoding, String sasDateFormatType) throws IOException {
         columns = null;
         data = new ArrayList<>();
 
@@ -64,7 +64,7 @@ public class TableResource {
 
         Reader reader = null;
         if (fileName.endsWith(".sas7bdat")) {
-            reader = new SasReader();
+            reader = new SasReader(encoding, sasDateFormatType);
         } else if (fileName.endsWith(".sbdf")) {
             reader = new SbdfReader();
         } else if (fileName.endsWith(".stdf")) {
@@ -75,12 +75,17 @@ public class TableResource {
 
         if (reader != null) {
             AtomicInteger i = new AtomicInteger();
-            reader.read(file, encoding,
+            reader.read(file,
                     cols -> columns = new SmartColumns(cols),
-                    row -> data.add(new SmartRow(i.getAndIncrement(), convert(row)))
+                    row -> {
+                        data.add(new SmartRow(i.getAndIncrement(), convert(row)));
+                        if (i.get() % 100000 == 0) {
+                            log.debug("Loaded [{}] rows", i.get());
+                        }
+                    }
             );
         }
 
-        log.info("Loaded [{}] records", data.size());
+        log.info("Finally loaded [{}] records", data.size());
     }
 }

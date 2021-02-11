@@ -5,6 +5,6 @@ import java.io.IOException;
 import java.util.function.Consumer;
 
 public interface Reader {
-    void read(File file, String encoding,
-              Consumer<String[]> columnsConsumer, Consumer<Object[]> rowsConsumer) throws IOException;
+    void read(File file, Consumer<String[]> columnsConsumer,
+              Consumer<Object[]> rowsConsumer) throws IOException;
 }

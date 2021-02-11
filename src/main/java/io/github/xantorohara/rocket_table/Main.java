@@ -40,6 +40,10 @@ public class Main extends Application {
             controller.setEncoding(namedParameters.get("encoding"));
         }
 
+        if (namedParameters.containsKey("sas-date-format-type")) {
+            controller.setSasDateFormatType(namedParameters.get("sas-date-format-type"));
+        }
+
         if (!args.isEmpty()) {
             controller.openFile(new File(args.get(0)));
         }

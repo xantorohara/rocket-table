@@ -21,7 +21,7 @@ public class TableModelTestSpecialSymbols extends TableModelTest {
     public void init() throws IOException {
         model = new TableModel();
         File f = new File("src/test/resources/abc-special_symbols.csv");
-        model.load(f);
+        model.load(f, null, null);
     }
 
     @Override

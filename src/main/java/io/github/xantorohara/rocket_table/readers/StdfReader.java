@@ -16,8 +16,8 @@ public class StdfReader implements Reader {
     private final Charset utf8 = Charset.forName("UTF-8");
 
     @Override
-    public void read(File file, String encoding,
-                     Consumer<String[]> columnsConsumer, Consumer<Object[]> rowsConsumer) throws IOException {
+    public void read(File file, Consumer<String[]> columnsConsumer,
+                     Consumer<Object[]> rowsConsumer) throws IOException {
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), utf8))) {
             int ignore = br.read();

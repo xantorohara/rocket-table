@@ -1,9 +1,12 @@
-
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <title>Rocket Table</title>
+    <meta name="description" content="Free SAS viewer">
+    <meta name="keywords" content="SAS, SAS7BDAT, Viewer">
+    <meta name="author" content="Xantorohara">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -12,9 +15,11 @@
             max-width: 900px;
             margin: 50px auto;
         }
+
         table {
-           border-collapse: collapse;
+            border-collapse: collapse;
         }
+
         table td, table th {
             padding: 5px 10px;
             margin: 0;
@@ -22,130 +27,162 @@
             border-spacing: 0;
             border: solid 1px #cccccc;
         }
+
         li {
             padding: 5px;
         }
     </style>
-    <!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter25278200 = new Ya.Metrika({ id:25278200, clickmap:true, trackLinks:true, accurateTrackBounce:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/25278200" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript"> (function (d, w, c) {
+        (w[c] = w[c] || []).push(function () {
+            try {
+                w.yaCounter25278200 = new Ya.Metrika({
+                    id: 25278200,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true
+                });
+            } catch (e) {
+            }
+        });
+        var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () {
+            n.parentNode.insertBefore(s, n);
+        };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else {
+            f();
+        }
+    })(document, window, "yandex_metrika_callbacks"); </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/25278200" style="position:absolute; left:-9999px;" alt=""/></div>
+    </noscript> <!-- /Yandex.Metrika counter -->
 </head>
 <body>
 <h1>Rocket table</h1>
 <h2>About</h2>
 <p>Rocket table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and CSV formats.</p>
-<p><img alt="Application screenshot" src="https://xantorohara.github.io/rocket-table/screenshot.png" /></p>
+<p><img alt="Application screenshot" src="https://xantorohara.github.io/rocket-table/screenshot.png"/></p>
 <h2>Download</h2>
-<p><a href="https://xantorohara.github.io/rocket-table/rocket-table-1.1.2.zip">rocket-table-1.1.2.zip</a></p>
-<p>Previous versions are available as well at the 
-<a href="https://github.com/xantorohara/rocket-table/tree/master/docs">project repository</a></p>
+<p><a href="https://xantorohara.github.io/rocket-table/rocket-table-1.1.3-beta.zip">rocket-table-1.1.3-beta.zip</a></p>
+<p>Previous versions are available as well at the
+    <a href="https://github.com/xantorohara/rocket-table/tree/master/docs">project repository</a></p>
 <h2>Changelog</h2>
 <ul>
-<li>2019.03.08 v1.1.2 - Local and shared "Programs" configs</li>
-<li>2019.03.07 v1.1.1 - Upgraded to Parso v2.0.11, added "Programs" support</li>
-<li>2018.07.14 v1.0.12 - Published sources</li>
-<li>2018.06.08 v1.0.11 - Changed license to Apache License v2.0</li>
-<li>2018.06.05 v1.0.10 - Upgraded to Parso v2.0.9</li>
-<li>2017.04.05 v1.0.9  - Added encoding command line parameter</li>
-<li>2017.03.19 v1.0.7  - Added support for STDF (Spotfire Text Data File) format</li>
-<li>2017.03.09 v1.0.6  - Added support for SBDF (Spotfire Binary Data File) format</li>
-<li>2016.04.10 v1.0.5  - Upgraded to Parso v1.2.1</li>
-<li>...</li>
-<li>2015.01.10 v1.0.1  -  Initial version</li>
+    <li>2021.02.11 v1.1.3-beta - Removed "Programs" support as it was confusing everyone. Added command line parameter to specify
+        type of SAS date interpretation.</li>
+    <li>2019.03.08 v1.1.2 - Local and shared "Programs" configs</li>
+    <li>2019.03.07 v1.1.1 - Upgraded to Parso v2.0.11, added "Programs" support</li>
+    <li>2018.07.14 v1.0.12 - Published sources</li>
+    <li>2018.06.08 v1.0.11 - Changed license to Apache License v2.0</li>
+    <li>2018.06.05 v1.0.10 - Upgraded to Parso v2.0.9</li>
+    <li>2017.04.05 v1.0.9 - Added encoding command line parameter</li>
+    <li>2017.03.19 v1.0.7 - Added support for STDF (Spotfire Text Data File) format</li>
+    <li>2017.03.09 v1.0.6 - Added support for SBDF (Spotfire Binary Data File) format</li>
+    <li>2016.04.10 v1.0.5 - Upgraded to Parso v1.2.1</li>
+    <li>...</li>
+    <li>2015.01.10 v1.0.1 - Initial version</li>
 </ul>
 <h2>Features</h2>
 <ul>
-<li>Open files in SAS7BDAT, SBDF and CSV formats</li>
-<li>Real-time search over the data table</li>
-<li>Search using wildcard patterns</li>
-<li>Search by specific columns</li>
-<li>Show only specific set of columns</li>
-<li>Highlight matched rows</li>
-<li>Filter matched rows</li>
-<li>Sorting</li>
-<li>Truncate options</li>
-<li>Count total, matched, selected and unique rows</li>
-<li>Cross-platform (Windows, Linux, Mac OS X)</li>
-<li>Minimalistic flat design</li>
-<li>Small application size (around 100KB)</li>
+    <li>Open files in SAS7BDAT, SBDF and CSV formats</li>
+    <li>Real-time search over the data table</li>
+    <li>Search using wildcard patterns</li>
+    <li>Search by specific columns</li>
+    <li>Show only specific set of columns</li>
+    <li>Highlight matched rows</li>
+    <li>Filter matched rows</li>
+    <li>Sorting</li>
+    <li>Truncate options</li>
+    <li>Count total, matched, selected and unique rows</li>
+    <li>Cross-platform (Windows, Linux, Mac OS X)</li>
+    <li>Minimalistic flat design</li>
+    <li>Small application size</li>
 </ul>
 <h2>Hotkeys</h2>
 <ul>
-<li><strong>Alt+S</strong> - focus to "Search" input</li>
-<li><strong>Alt+C</strong> - focus to "Columns" input</li>
-<li><strong>Ctrl+Space</strong> - autocomplete column name</li>
-<li><strong>Alt+F</strong> - toggle "Filter" mode</li>
-<li><strong>Alt+U</strong> - toggle "Unique" mode</li>
-<li><strong>Alt+O</strong> - show "Open file" dialog</li>
-<li><strong>Alt+E</strong> - show "Export table data" dialog</li>
-<li><strong>Alt+T</strong> - focus to "Truncate" menu</li>
+    <li><strong>Alt+S</strong> - focus to "Search" input</li>
+    <li><strong>Alt+C</strong> - focus to "Columns" input</li>
+    <li><strong>Ctrl+Space</strong> - autocomplete column name</li>
+    <li><strong>Alt+F</strong> - toggle "Filter" mode</li>
+    <li><strong>Alt+U</strong> - toggle "Unique" mode</li>
+    <li><strong>Alt+O</strong> - show "Open file" dialog</li>
+    <li><strong>Alt+E</strong> - show "Export table data" dialog</li>
+    <li><strong>Alt+T</strong> - focus to "Truncate" menu</li>
 </ul>
 <h2>Search wildcards</h2>
 <ul>
-<li><strong>?</strong> -  match any single character</li>
-<li>* -  match any string (including the empty string)</li>
+    <li><strong>?</strong> - match any single character</li>
+    <li>* - match any string (including the empty string)</li>
 </ul>
 <p>Wildcard characters can be anywhere in the search string, e.g:</p>
 <ul>
-<li><strong>word</strong>* -  starts with "word"</li>
-<li><strong>*word</strong> -  ends with "word"</li>
-<li><strong>*word</strong>* -  contains "word"</li>
+    <li><strong>word</strong>* - starts with "word"</li>
+    <li><strong>*word</strong> - ends with "word"</li>
+    <li><strong>*word</strong>* - contains "word"</li>
 </ul>
 <h2>Search flags</h2>
 <ul>
-<li><strong>~</strong> - enable case-insensitive search</li>
-<li><strong>!</strong> - inverse match</li>
+    <li><strong>~</strong> - enable case-insensitive search</li>
+    <li><strong>!</strong> - inverse match</li>
 </ul>
 <p>Flag characters should be at the leading positions in the string, e.g:</p>
 <ul>
-<li><strong>!word</strong> - not equals to "word"</li>
-<li><strong>~word</strong>* - starts with "Word" or "word"</li>
-<li><strong>~!*word</strong>* - not contains "Word" or "word", or "wOrD"</li>
+    <li><strong>!word</strong> - not equals to "word"</li>
+    <li><strong>~word</strong>* - starts with "Word" or "word"</li>
+    <li><strong>~!*word</strong>* - not contains "Word" or "word", or "wOrD"</li>
 </ul>
 <h2>Search examples</h2>
 <table>
-<thead>
-<tr>
-<th>Search string</th>
-<th>Match result</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>*berry</td>
-<td>Match all rows with berries (e.g.: Blueberry, Strawberry, etc.)</td>
-</tr>
-<tr>
-<td>CMSCAT=*THERAPY</td>
-<td>Match all medications with category name ending with "THERAPY" (e.g.: CHEMOTHERAPY, RADIOTHERAPY and HORMONAL THERAPY)</td>
-</tr>
-<tr>
-<td>COLUMN1=VALUE1, COLUMN2=VALUE2, COLUMN3=VALUE3</td>
-<td>Match all rows where (COLUMN1=VALUE1 AND COLUMN2=VALUE2 AND COLUMN3=VALUE3)</td>
-</tr>
-<tr>
-<td>SEX=Male, COUNTRY=USA, DEGREE=Academic</td>
-<td>Match all men from the USA who have an Academic degree</td>
-</tr>
-<tr>
-<td>AGE=6?, AGE=7?</td>
-<td>Match all patients aged 60-70 years old (from 60 to 79)</td>
-</tr>
-<tr>
-<td>COLUMN1=VALUE1, COLUMN1=VALUE2, COLUMN2=VALUE3</td>
-<td>Match all rows where ((COLUMN1=VALUE1 OR COLUMN1=VALUE2) AND COLUMN2=VALUE3)</td>
-</tr>
-<tr>
-<td>SEX=Male, COUNTRY=USA, COUNTRY=Canada, DEGREE=Bachelor, DEGREE=Master</td>
-<td>Match all men from the USA or Canada who have a Bachelor or Master degree</td>
-</tr>
-<tr>
-<td>COUNTRY=!USA</td>
-<td>Match all patients not from the USA</td>
-</tr>
-<tr>
-<td>COUNTRY=!USA, GENDER=~MaLe</td>
-<td>Match all men not from the USA</td>
-</tr>
-</tbody>
+    <thead>
+    <tr>
+        <th>Search string</th>
+        <th>Match result</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>*berry</td>
+        <td>Match all rows with berries (e.g.: Blueberry, Strawberry, etc.)</td>
+    </tr>
+    <tr>
+        <td>CMSCAT=*THERAPY</td>
+        <td>Match all medications with category name ending with "THERAPY" (e.g.: CHEMOTHERAPY, RADIOTHERAPY and
+            HORMONAL THERAPY)
+        </td>
+    </tr>
+    <tr>
+        <td>COLUMN1=VALUE1, COLUMN2=VALUE2, COLUMN3=VALUE3</td>
+        <td>Match all rows where (COLUMN1=VALUE1 AND COLUMN2=VALUE2 AND COLUMN3=VALUE3)</td>
+    </tr>
+    <tr>
+        <td>SEX=Male, COUNTRY=USA, DEGREE=Academic</td>
+        <td>Match all men from the USA who have an Academic degree</td>
+    </tr>
+    <tr>
+        <td>AGE=6?, AGE=7?</td>
+        <td>Match all patients aged 60-70 years old (from 60 to 79)</td>
+    </tr>
+    <tr>
+        <td>COLUMN1=VALUE1, COLUMN1=VALUE2, COLUMN2=VALUE3</td>
+        <td>Match all rows where ((COLUMN1=VALUE1 OR COLUMN1=VALUE2) AND COLUMN2=VALUE3)</td>
+    </tr>
+    <tr>
+        <td>SEX=Male, COUNTRY=USA, COUNTRY=Canada, DEGREE=Bachelor, DEGREE=Master</td>
+        <td>Match all men from the USA or Canada who have a Bachelor or Master degree</td>
+    </tr>
+    <tr>
+        <td>COUNTRY=!USA</td>
+        <td>Match all patients not from the USA</td>
+    </tr>
+    <tr>
+        <td>COUNTRY=!USA, GENDER=~MaLe</td>
+        <td>Match all men not from the USA</td>
+    </tr>
+    </tbody>
 </table>
 <h2>Associate table files with Rocket Table in Windows</h2>
 <p>Just execute this script from the directory where the rocket-table.jar is located:</p>
@@ -163,29 +200,43 @@
 
 <h2>Command line parameters</h2>
 <ul>
-<li><strong>--encoding=EncodingName</strong> - specify encoding for input files. E.g.: --encoding=Cp1250</li>
+    <li><strong>--encoding=EncodingName</strong> - specify encoding for input files. E.g.: --encoding=Cp1250</li>
+    <li>
+        <strong>--sas-date-format-type=FORMAT_TYPE</strong> - specify date format for input files.
+        E.g.:
+        <ul>
+            <li>--sas-date-format-type=JAVA_DATE_LEGACY (default)</li>
+            <li>--sas-date-format-type=SAS_FORMAT_TRIM_EXPERIMENTAL</li>
+            <li>--sas-date-format-type=SAS_VALUE</li>
+            <li>--sas-date-format-type=EPOCH_SECONDS</li>
+        </ul>
+    </li>
 </ul>
 <h2>Libraries used</h2>
 <ul>
-<li>Parso v2.0.11</li>
-<li>SBDF v6.5.0</li>
+    <li>Parso v2.0.14</li>
+    <li>SBDF v6.5.0</li>
 </ul>
 <h2>Contacts</h2>
 <p>For questions, feature requests or technical support related to this application you can contact
-<a href="mailto:xantorohara@gmail.com">xantorohara@gmail.com</a></p>
+    <a href="mailto:xantorohara@gmail.com">xantorohara@gmail.com</a></p>
 <h2>Build from sources</h2>
 <ol>
-<li>Clone or download <a href="https://github.com/xantorohara/rocket-table">Rocket Table repository</a></li>
-<li>Build it using maven:</li>
+    <li>Clone or download <a href="https://github.com/xantorohara/rocket-table">Rocket Table repository</a></li>
+    <li>Build it using maven:</li>
 </ol>
 <pre><code class="bash">mvn clean package
 </code></pre>
 
 <h2>License</h2>
 <p>Rocket Table by Xantorohara is licensed under Apache License v2.0.</p>
-<p>&copy;Xantorohara, 2015-2019</p>
+<p>&copy;Xantorohara, 2015-2021</p>
 <br/>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- xantorohara.github.io-adaptive --><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6112298272240282" data-ad-slot="8131138684" data-ad-format="auto"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- xantorohara.github.io-adaptive -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6112298272240282" data-ad-slot="8131138684"
+     data-ad-format="auto"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
 </body>
 </html>

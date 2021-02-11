@@ -105,14 +105,24 @@
 <h2>Command line parameters</h2>
 <ul>
     <li>
-        <span class="bl-60">--encoding=EncodingName</span> specify encoding for input files.
+        <span class="bl-60">--encoding=EncodingName</span> specify encoding.
         E.g.: --encoding=Cp1250
+    </li>
+    <li>
+        <span class="bl-60">--sas-date-format-type=FORMAT_TYPE</span> specify date format type.
+        E.g.:
+        <ul>
+            <li>--sas-date-format-type=JAVA_DATE_LEGACY (default)</li>
+            <li>--sas-date-format-type=SAS_FORMAT_TRIM_EXPERIMENTAL</li>
+            <li>--sas-date-format-type=SAS_VALUE</li>
+            <li>--sas-date-format-type=EPOCH_SECONDS</li>
+        </ul>
     </li>
 </ul>
 
 <h2>Libraries used</h2>
 <ul>
-    <li> Parso v2.0.9</li>
+    <li> Parso v2.0.14</li>
     <li> SBDF v6.5.0</li>
 </ul>
 

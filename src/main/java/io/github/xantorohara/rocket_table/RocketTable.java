@@ -4,8 +4,6 @@ import io.github.xantorohara.rocket_table.engine.SmartColumns;
 import io.github.xantorohara.rocket_table.engine.SmartRow;
 import io.github.xantorohara.rocket_table.engine.SmartWatch;
 import io.github.xantorohara.rocket_table.engine.TableModel;
-import io.github.xantorohara.rocket_table.programs.Program;
-import io.github.xantorohara.rocket_table.programs.Programs;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableMap;
@@ -23,15 +21,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.converter.DefaultStringConverter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static javafx.scene.input.KeyCombination.keyCombination;
 
@@ -46,7 +43,6 @@ public class RocketTable {
 
     public Button openFileButton;
     public Button columnsSetButton;
-    public MenuButton programsButton;
     public Button exportButton;
     public TextField searchTextField;
     public TextField columnsTextField;
@@ -66,11 +62,12 @@ public class RocketTable {
 
     private boolean internalChange = false;
 
-    private String encoding = "ASCII";
+    @Setter
+    private String encoding;
 
-    public void setEncoding(String encoding) {
-        this.encoding = encoding;
-    }
+    @Setter
+    private String sasDateFormatType;
+
 
     public void init(Stage stage) {
         log.info("Init started");
@@ -82,7 +79,6 @@ public class RocketTable {
         initHotkeys();
         initActions();
         initBindings();
-        initPrograms();
         log.info("Init finished");
     }
 
@@ -92,7 +88,7 @@ public class RocketTable {
         dialog.initStyle(StageStyle.UTILITY);
         dialog.setHeaderText("\"Rocket table\" is a lightweight viewer for " +
                 "SAS (.*sas7bdat), Spotfire (.sbdf, * stdf) and CSV files.\n" +
-                "© Xantorohara, 2015-2019"
+                "© Xantorohara, 2015-2021"
         );
         dialog.setGraphic(new ImageView((new Image(getClass().getResourceAsStream("icon.png")))));
 
@@ -166,59 +162,6 @@ public class RocketTable {
     public void columnsTextFieldAutocomplete(KeyEvent e) {
         if (e.isControlDown() && e.getCode() == KeyCode.SPACE) {
             columnsAutocomplete(columnsTextField);
-        }
-    }
-
-    private void initPrograms() {
-
-        List<Program> programs;
-        try {
-            programs = Programs.loadPrograms();
-        } catch (IOException e) {
-            showExceptionDialog("Can't load programs", e);
-            return;
-        }
-
-        if (!programs.isEmpty()) {
-            programsButton.getItems().setAll(
-                    programs.stream().map(program -> {
-                        MenuItem menuItem = new MenuItem(program.getName());
-                        menuItem.setOnAction(event -> {
-                            runProgram(program);
-                        });
-                        return menuItem;
-                    }).collect(Collectors.toList())
-            );
-            programsButton.setDisable(false);
-        }
-    }
-
-    private void runProgram(Program program) {
-
-        if (program.getInput() != null) {
-            File inputFile = new File(program.getInput());
-            inputFile.delete();
-            if (tableModel.getColumns() != null) {
-                tableModel.export(inputFile);
-            }
-        }
-
-        if (program.getResult() != null) {
-            File resultFile = new File(program.getResult());
-            resultFile.delete();
-        }
-
-        if (program.getCmd() != null) {
-            try {
-                Programs.exec(program);
-            } catch (IOException | InterruptedException e) {
-                showExceptionDialog("Program execution failed", e);
-                e.printStackTrace();
-            }
-        }
-
-        if (program.getResult() != null) {
-            openFile(new File(program.getResult()));
         }
     }
 
@@ -409,7 +352,7 @@ public class RocketTable {
 
         try {
             SmartWatch sw = SmartWatch.start("open");
-            tableModel.load(file, encoding);
+            tableModel.load(file, encoding, sasDateFormatType);
             sw.stop();
             recreateTable();
         } catch (Exception e) {
