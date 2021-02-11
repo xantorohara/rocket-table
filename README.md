@@ -6,7 +6,7 @@ Rocket table is a lightweight table viewer for files in SAS7BDAT, SBDF, STDF and
 ![Application screenshot](https://xantorohara.github.io/rocket-table/screenshot.png)
 
 ## Download
-[rocket-table-1.1.2.zip](https://xantorohara.github.io/rocket-table/rocket-table-1.1.2.zip)
+[rocket-table-1.1.3-beta.zip](https://xantorohara.github.io/rocket-table/rocket-table-1.1.3-beta.zip)
 
 Previous versions are available as well at the 
 [project repository](https://github.com/xantorohara/rocket-table/tree/master/docs)
@@ -109,7 +109,7 @@ Just execute this script from the directory where the rocket-table.jar is locate
 * **--encoding=EncodingName** - specify encoding for input files. E.g.: --encoding=Cp1250
 * **--sas-date-format-type=FORMAT_TYPE** - specify date format for input files.  
   E.g.:
-  --sas-date-format-type=JAVA_DATE (default) | SAS_FORMAT | SAS_VALUE | EPOCH_SECONDS | EPOCH_MILLIS
+  --sas-date-format-type=JAVA_DATE (default) | SAS_FORMAT_TRIM_EXPERIMENTAL | SAS_VALUE | EPOCH_SECONDS
 
 ## Libraries used
 
